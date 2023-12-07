@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR-DataAccess", "Signa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWebUI", "SignalRWebUI\SignalRWebUI.csproj", "{BA7BCCB4-8638-4D1E-9499-F98830432E47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR-Dto", "SignalR-Dto\SignalR-Dto.csproj", "{19C26FC8-71FE-487C-9BFC-BF3E84B55C4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR-Business", "SignalR-Business\SignalR-Business.csproj", "{D18C109B-4490-43CC-8695-757CEAC0049E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{BA7BCCB4-8638-4D1E-9499-F98830432E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA7BCCB4-8638-4D1E-9499-F98830432E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA7BCCB4-8638-4D1E-9499-F98830432E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C26FC8-71FE-487C-9BFC-BF3E84B55C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C26FC8-71FE-487C-9BFC-BF3E84B55C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C26FC8-71FE-487C-9BFC-BF3E84B55C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C26FC8-71FE-487C-9BFC-BF3E84B55C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18C109B-4490-43CC-8695-757CEAC0049E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18C109B-4490-43CC-8695-757CEAC0049E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18C109B-4490-43CC-8695-757CEAC0049E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18C109B-4490-43CC-8695-757CEAC0049E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
