@@ -10,4 +10,12 @@
   <ItemGroup>
     <ProjectReference Include="..\SignalR-DataAccess\SignalR-DataAccess.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Abstract\" />
+    <None Remove="Concrete\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+    <Folder Include="Concrete\" />
+  </ItemGroup>
 </Project>
