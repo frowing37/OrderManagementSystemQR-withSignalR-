@@ -12,8 +12,6 @@ namespace SignalR_Entities.Concrete
 		public string Mail { get; set; }
 
 		public string FooterDescription { get; set; }
-
-
 	}
 }
 
