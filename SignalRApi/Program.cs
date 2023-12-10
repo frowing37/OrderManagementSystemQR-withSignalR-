@@ -3,12 +3,13 @@ using SignalR_Business.Abstract;
 using SignalR_Business.Concrete;
 using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.EntityFramework;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddDbContext<SignalRContext>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.AddScoped<IAboutService,AboutManager>();
 builder.Services.AddScoped<IAboutDAL, efAbout>();
 builder.Services.AddScoped<IBookingService, BookingManager>();
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IContactDAL, efContact>();
 builder.Services.AddScoped<IDiscountService, DiscountManager>();
 builder.Services.AddScoped<IDiscountDAL, efDiscount>();
 builder.Services.AddScoped<IFeatureService, FeatureManager>();
+builder.Services.AddScoped<IFeatureDAL, efFeature>();
 builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
 builder.Services.AddScoped<ISocialMediaDAL, efSocialMedia>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();

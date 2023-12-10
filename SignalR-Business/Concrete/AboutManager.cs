@@ -7,7 +7,7 @@ namespace SignalR_Business.Concrete
 {
     public class AboutManager : IAboutService
     {
-        protected readonly IAboutDAL _aboutDAL;
+        private readonly IAboutDAL _aboutDAL;
 
         public AboutManager(IAboutDAL aboutDAL)
         {

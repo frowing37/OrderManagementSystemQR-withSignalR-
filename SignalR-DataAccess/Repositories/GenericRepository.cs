@@ -6,7 +6,7 @@ namespace SignalR_DataAccess.Repositories
 {
     public class GenericRepository<T> : IGenericDAL<T> where T : class
     {
-        protected readonly SignalRContext _context;
+        private readonly SignalRContext _context;
 
         public GenericRepository(SignalRContext context)
         {
