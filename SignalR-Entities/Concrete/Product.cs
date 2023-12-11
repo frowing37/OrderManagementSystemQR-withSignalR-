@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SignalR_Entities.Concrete
 {
 	public class Product
@@ -14,6 +16,12 @@ namespace SignalR_Entities.Concrete
 		public string ImageURL { get; set; }
 
 		public bool ProductStatus { get; set; }
+
+		[ForeignKey("Category")]
+
+		public int CategoryID { get; set; }
+
+		public Category Category { get; set; }
 	}
 }
 

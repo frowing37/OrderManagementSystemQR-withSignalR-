@@ -1,4 +1,6 @@
 ﻿using System;
+using SignalR_Entities.Concrete;
+
 namespace SignalR_Dto.ProductDto
 {
 	public class ResultProductDto
@@ -14,6 +16,8 @@ namespace SignalR_Dto.ProductDto
         public string ImageURL { get; set; }
 
         public bool ProductStatus { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }
 

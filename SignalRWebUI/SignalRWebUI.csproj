@@ -8,4 +8,28 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="ViewComponents\" />
+    <None Remove="ViewComponents\LayoutComponents\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\_LayoutHeaderPartialComponent\" />
+    <None Remove="Views\AdminLayout\" />
+    <None Remove="Views\Category\" />
+    <None Remove="Views\Shared\Components\_LayoutNavBarPartialComponent\" />
+    <None Remove="Views\Shared\Components\_LayoutSideBarPartialComponent\" />
+    <None Remove="Views\Shared\Components\_LayoutFooterPartialComponent\" />
+    <None Remove="Views\Shared\Components\_LayoutScriptPartialComponent\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewComponents\" />
+    <Folder Include="ViewComponents\LayoutComponents\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\_LayoutHeaderPartialComponent\" />
+    <Folder Include="Views\AdminLayout\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Shared\Components\_LayoutNavBarPartialComponent\" />
+    <Folder Include="Views\Shared\Components\_LayoutSideBarPartialComponent\" />
+    <Folder Include="Views\Shared\Components\_LayoutFooterPartialComponent\" />
+    <Folder Include="Views\Shared\Components\_LayoutScriptPartialComponent\" />
+  </ItemGroup>
 </Project>

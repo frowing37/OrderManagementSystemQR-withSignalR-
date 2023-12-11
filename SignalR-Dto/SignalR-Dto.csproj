@@ -29,4 +29,7 @@
     <Folder Include="SocialMediaDto\" />
     <Folder Include="TestimonialDto\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SignalR-Entities\SignalR-Entities.csproj" />
+  </ItemGroup>
 </Project>

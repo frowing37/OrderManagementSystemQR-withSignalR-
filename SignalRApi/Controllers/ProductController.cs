@@ -7,6 +7,8 @@ using SignalR_Business.Abstract;
 using SignalR_Dto.ProductDto;
 using SignalR_Entities.Concrete;
 using AutoMapper;
+using SignalR_DataAccess.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace SignalRApi.Controllers
 {
@@ -37,6 +39,27 @@ namespace SignalRApi.Controllers
 
             return Ok(value);
         }
+
+        [HttpGet("ProductListwithCategories")]
+        public IActionResult ProductListwithCategories()
+        {
+            //var values = _mapper.Map<List<ResultProductwithCategoriesDto>>(_productService.GetProductswithCategories());
+
+            var context = new SignalRContext();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductwithCategoriesDto
+            {
+                ProductID = y.ProductID,
+                ProductName = y.ProductName,
+                ProductStatus = y.ProductStatus,
+                ImageURL = y.ImageURL,
+                Description = y.Description,
+                Price = y.Price,
+                CategoryName = y.Category.Name
+            }).ToList();
+
+            return Ok(values);
+        }
+
 
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
