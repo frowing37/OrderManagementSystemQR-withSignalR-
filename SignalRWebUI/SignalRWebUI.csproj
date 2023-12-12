@@ -19,6 +19,8 @@
     <None Remove="Views\Shared\Components\_LayoutSideBarPartialComponent\" />
     <None Remove="Views\Shared\Components\_LayoutFooterPartialComponent\" />
     <None Remove="Views\Shared\Components\_LayoutScriptPartialComponent\" />
+    <None Remove="Models\Dto%27s\" />
+    <None Remove="Models\Dto%27s\CategoryDto\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewComponents\" />
@@ -31,5 +33,10 @@
     <Folder Include="Views\Shared\Components\_LayoutSideBarPartialComponent\" />
     <Folder Include="Views\Shared\Components\_LayoutFooterPartialComponent\" />
     <Folder Include="Views\Shared\Components\_LayoutScriptPartialComponent\" />
+    <Folder Include="Models\Dto%27s\" />
+    <Folder Include="Models\Dto%27s\CategoryDto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
