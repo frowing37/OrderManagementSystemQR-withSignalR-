@@ -31,6 +31,7 @@
     <ProjectReference Include="..\SignalR-Entities\SignalR-Entities.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\SignalRWebUI\SignalRWebUI.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Mapping\" />

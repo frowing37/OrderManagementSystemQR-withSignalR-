@@ -70,7 +70,8 @@ namespace SignalRApi.Controllers
                 Description = createProductDto.Description,
                 Price = createProductDto.Price,
                 ImageURL = createProductDto.ImageURL,
-                ProductStatus = createProductDto.ProductStatus
+                ProductStatus = createProductDto.ProductStatus,
+                CategoryID = createProductDto.CategoryID
             };
 
             _productService.AddwS(product);

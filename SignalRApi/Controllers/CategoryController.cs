@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
+        public IActionResult CreateCategory(SignalRWebUI.Models.Dtos.CategoryDto.CreateCategoryDto createCategoryDto)
         {
             Category category = new Category()
             {
