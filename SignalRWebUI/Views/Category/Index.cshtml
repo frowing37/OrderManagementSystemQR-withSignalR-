@@ -19,25 +19,30 @@
                         </div>
                         <table class="table mt-3">
                             <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Kategori Adı</th>
-                                    <th scope="col">Durum</th>
-                                    <th scope="col">Sil</th>
-                                    <th scope="col">Güncelle</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Kategori Adı</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">Sil</th>
+                                <th scope="col">Güncelle</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var category in Model)
-                                {
-                                    <tr>
-                                        <td>@category.CategoryID</td>
-                                        <td>@category.Name</td>
-                                        <td>@category.Status</td>
-                                        <td><a href="/Category/DeleteCategory/@category.CategoryID" class="btn btn-outline-danger">Sil</a></td>
-                                        <td><a href="/Category/UpdateCategory/@category.CategoryID" class="btn btn-outline-success">Güncelle</a></td>
-                                    </tr>
-                                }
+                            @foreach (var category in Model)
+                            {
+                                <tr>
+                                    <td>@category.CategoryID</td>
+                                    <td>@category.Name</td>
+                                    @if(@category.Status) {
+                                        <td><a href="/Category/UpdateActivate/@category.CategoryID" class="btn btn-outline-info">Aktif</a></td>
+                                    }
+                                    else {
+                                        <td><a href="/Category/UpdateActivate/@category.CategoryID" class="btn btn-outline-dark">DeAktif</a></td>
+                                    }
+                                    <td><a href="/Category/DeleteCategory/@category.CategoryID" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Category/UpdateCategory/@category.CategoryID" class="btn btn-outline-success">Güncelle</a></td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                         <a href="/Category/CreateCategory" class="btn btn-outline-primary">Yeni Kategori Ekle</a>

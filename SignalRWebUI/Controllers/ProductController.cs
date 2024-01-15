@@ -30,4 +30,11 @@ public class ProductController : Controller
         
         return View();
     }
+
+    /*public async Task<IActionResult> CreateProduct()
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client
+        
+    }*/
 }
