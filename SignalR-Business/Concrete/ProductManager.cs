@@ -34,7 +34,7 @@ namespace SignalR_Business.Concrete
             return _productDAL.GetListAll();
         }
 
-        public List<Product> GetProductswithCategories()
+        public List<Product> GetProductswithCategorieswS()
         {
             return _productDAL.GetProductswithCategories();
         }

@@ -31,7 +31,7 @@ namespace SignalRWebUI.Controllers
                 return View(values);
             }
 
-            return View();
+            return RedirectToAction("Error", "Home");
         }
 
         [HttpGet]
@@ -127,12 +127,28 @@ namespace SignalRWebUI.Controllers
                     values.Status = false;
                     var responseMessageUpdate = await client.PutAsJsonAsync("http://localhost:7237/api/Category", values);
 
-                    return RedirectToAction("Index", "Category");
+                    if(responseMessageUpdate.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index", "Category");   
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
 ;                }
                 else
                 {
                     values.Status = true;
                     var responseMessageUpdate = await client.PutAsJsonAsync("http://localhost:7237/api/Category", values);
+                    
+                    if(responseMessageUpdate.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index", "Category");   
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error", "Home");
+                    }
                     
                     return RedirectToAction("Index", "Category");
                 }

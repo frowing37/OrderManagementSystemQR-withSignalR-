@@ -32,7 +32,7 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("{ID}")]
         public IActionResult GetProduct(int ID)
         {
             var value = _productService.GetByIDwS(ID);
@@ -43,26 +43,14 @@ namespace SignalRApi.Controllers
         [HttpGet("ProductListwithCategories")]
         public IActionResult ProductListwithCategories()
         {
-            //var values = _mapper.Map<List<ResultProductwithCategoriesDto>>(_productService.GetProductswithCategories());
-
-            var context = new SignalRContext();
-            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductwithCategoriesDto
-            {
-                ProductID = y.ProductID,
-                ProductName = y.ProductName,
-                ProductStatus = y.ProductStatus,
-                ImageURL = y.ImageURL,
-                Description = y.Description,
-                Price = y.Price,
-                CategoryName = y.Category.Name
-            }).ToList();
-
+            var values = _mapper.Map<List<ResultProductwithCategoriesDto>>(_productService.GetProductswithCategorieswS());
+            
             return Ok(values);
         }
 
 
         [HttpPost]
-        public IActionResult CreateProduct(CreateProductDto createProductDto)
+        public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
         {
             Product product = new Product()
             {
@@ -80,7 +68,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
+        public IActionResult UpdateProduct([FromBody] UpdateProductDto updateProductDto)
         {
             Product product = new Product()
             {
@@ -89,7 +77,8 @@ namespace SignalRApi.Controllers
                 Description = updateProductDto.Description,
                 Price = updateProductDto.Price,
                 ImageURL = updateProductDto.ImageURL,
-                ProductStatus = updateProductDto.ProductStatus
+                ProductStatus = updateProductDto.ProductStatus,
+                CategoryID = updateProductDto.CategoryID
             };
 
             _productService.UpdatewS(product);
@@ -97,7 +86,7 @@ namespace SignalRApi.Controllers
             return Ok("Ürün güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteProduct(int ID)
         {
             var value = _productService.GetByIDwS(ID);

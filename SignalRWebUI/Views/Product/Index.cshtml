@@ -22,6 +22,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Ürün Adı</th>
+                                    <th scope="col">Kategorisi</th>
                                     <th scope="col">Durum</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
@@ -33,11 +34,12 @@
                                     <tr>
                                         <td>@urun.ProductID</td>
                                         <td>@urun.ProductName</td>
+                                        <td>@urun.CategoryName</td>
                                         @if(@urun.ProductStatus) {
-                                            <td><a href="/Category/UpdateActivate/@urun.ProductID" class="btn btn-outline-info">Aktif</a></td>
+                                            <td><a href="/Product/UpdateActivate/@urun.ProductID" class="btn btn-outline-info">Aktif</a></td>
                                         }
                                         else {
-                                            <td><a href="/Category/UpdateActivate/@urun.ProductID" class="btn btn-outline-dark">DeAktif</a></td> 
+                                            <td><a href="/Product/UpdateActivate/@urun.ProductID" class="btn btn-outline-dark">DeAktif</a></td> 
                                         }
                                         <td><a href="/Product/DeleteProduct/@urun.ProductID" class="btn btn-outline-danger">Sil</a></td>
                                         <td><a href="/Product/UpdateProduct/@urun.ProductID" class="btn btn-outline-success">Güncelle</a></td>
