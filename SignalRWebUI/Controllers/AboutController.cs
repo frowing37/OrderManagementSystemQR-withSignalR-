@@ -50,7 +50,7 @@ public class AboutController : Controller
     public async Task<IActionResult> UpdateAbout(int ID)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("http://localhost:7237/api/About");
+        var responseMessage = await client.GetAsync($"http://localhost:7237/api/About/{ID}");
         
         if(responseMessage.IsSuccessStatusCode)
         {
@@ -99,47 +99,55 @@ public class AboutController : Controller
     public async Task<IActionResult> UpdateActivate(int ID)
     {
         HttpClient client = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await client.GetAsync($"http://localhost:7237/api/About/{ID}");
         HttpResponseMessage responseMessageAll = await client.GetAsync("http://localhost:7237/api/About");
 
-        if(responseMessage.IsSuccessStatusCode && responseMessageAll.IsSuccessStatusCode)
+        if(responseMessageAll.IsSuccessStatusCode)
         {
-            var jsonAbout = await responseMessage.Content.ReadAsStringAsync();
-            var jsonAboutAll = await responseMessage.Content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<UpdateAboutDto>(jsonAbout);
+            var jsonAboutAll = await responseMessageAll.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<UpdateAboutDto>>(jsonAboutAll);
-
-            if (value.Status)
+            UpdateAboutDto temp = new UpdateAboutDto();
+            
+            foreach (var about in values)
             {
-                value.Status = false;
-                Random rnd = new Random();
-                int rand = 0;
-                while (value.AboutID != rand || rand == 0)
+                if (about.AboutID == ID)
                 {
-                    rand = rnd.Next(0,values.Count);
+                    temp.AboutID = about.AboutID;
+                    temp.Title = about.Title;
+                    temp.Status = about.Status;
+                    temp.Description = about.Description;
+                    temp.ImageURL = about.ImageURL;
+                    values.Remove(about);
+                    break;
                 }
-                values[rand].Status = true;
+            }
 
-                await client.PutAsJsonAsync("http://localhost:7237/api/About", value);
-                await client.PutAsJsonAsync("http://localhost:7237/api/About", values[rand]);
+            if (temp.Status)
+            {
+                temp.Status = false;
+                HttpResponseMessage rmT = await client.PutAsJsonAsync("http://localhost:7237/api/About", temp);
+
+                Random rnd = new Random();
+                int rand = rnd.Next(0, values.Count);
+
+                values[rand].Status = true;
+                HttpResponseMessage rmR = await client.PutAsJsonAsync("http://localhost:7237/api/About", values[rand]);
 
                 return RedirectToAction("Index", "About");
             }
             else
             {
-                value.Status = true;
-                await client.PutAsJsonAsync("http://localhost:7237/api/About", value);
+                temp.Status = true;
+                HttpResponseMessage rmT = await client.PutAsJsonAsync("http://localhost:7237/api/About", temp);
+
                 foreach (var about in values)
                 {
-                    if (about.AboutID != value.AboutID)
-                    {
-                        about.Status = false;
-                        await client.PutAsJsonAsync("http://localhost:7237/api/About", about);
-                    }
+                    about.Status = false;
+                    HttpResponseMessage rmTt = await client.PutAsJsonAsync("http://localhost:7237/api/About", about);
                 }
-
+                
                 return RedirectToAction("Index", "About");
             }
+            
         }
         else
         {

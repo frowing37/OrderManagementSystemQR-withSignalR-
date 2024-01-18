@@ -50,6 +50,7 @@ namespace SignalRApi.Controllers
                 AboutID = updateAboutDto.AboutID,
                 Description = updateAboutDto.Description,
                 ImageURL = updateAboutDto.ImageURL,
+                Status = updateAboutDto.Status,
                 Title = updateAboutDto.Title
             };
 
