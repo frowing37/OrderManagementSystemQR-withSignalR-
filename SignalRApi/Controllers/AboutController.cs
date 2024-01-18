@@ -29,7 +29,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAbout(CreateAboutDto createAboutDto)
+        public IActionResult CreateAbout([FromBody] CreateAboutDto createAboutDto)
         {
             About about = new About()
             {
@@ -43,7 +43,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
+        public IActionResult UpdateAbout([FromBody] UpdateAboutDto updateAboutDto)
         {
             About about = new About()
             {
@@ -57,7 +57,7 @@ namespace SignalRApi.Controllers
             return Ok("Hakkında alanı başarılı bir şekilde güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteAbout(int ID)
         {
             var value = _aboutService.GetByIDwS(ID);
@@ -66,7 +66,7 @@ namespace SignalRApi.Controllers
             return Ok("Hakkında kısmı başarılı bir şekilde silindi");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{ID}")]
         public IActionResult GetAbout(int ID)
         {
             var value = _aboutService.GetByIDwS(ID);

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SignalRWebUI.Models.Dtos.CategoryDto;
-using SignalRWebUI.Models.Dto_s.ProductDto;
+using SignalRWebUI.Models.Dtos.ProductDto;
 
 namespace SignalRWebUI.Controllers;
 

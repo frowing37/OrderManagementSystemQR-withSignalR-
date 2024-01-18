@@ -17,7 +17,7 @@ namespace SignalR_Dto.ProductDto
 
         public bool ProductStatus { get; set; }
 
-        public string CategoryName { get; set; }
+        public int CategoryID { get; set; }
     }
 }
 

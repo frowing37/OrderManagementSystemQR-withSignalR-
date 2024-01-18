@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Mvc;
 using SignalRWebUI.Models.Dtos.CategoryDto;
+using SignalRWebUI.Models.Dtos.ProductDto;
 using System.Text;
 
 namespace SignalRWebUI.Controllers
@@ -116,15 +117,26 @@ namespace SignalRWebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessageGet = await client.GetAsync($"http://localhost:7237/api/Category/{ID}");
+            //var responseMessageProducts = await client.GetAsync("http://localhost:7237/api/Product/ProductListwithCategories");
             
-            if(responseMessageGet.IsSuccessStatusCode)
+            if(responseMessageGet.IsSuccessStatusCode /*&& responseMessageProducts.IsSuccessStatusCode*/)
             {
                 var jsonData = await responseMessageGet.Content.ReadAsStringAsync();
+                //var jsonDataProducts = await responseMessageProducts.Content.ReadAsStringAsync(); 
                 var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
+                //var valuesProducts = JsonConvert.DeserializeObject<List<UpdateProductDto>>(jsonDataProducts);
 
                 if(values.Status)
                 {
                     values.Status = false;
+                    /*foreach (var product in valuesProducts)
+                    {
+                        if(product.CategoryID == ID)
+                        {
+                            product.ProductStatus = false;
+                            await client.PutAsJsonAsync("http://localhost:7237/api/Product", product);
+                        }
+                    }*/
                     var responseMessageUpdate = await client.PutAsJsonAsync("http://localhost:7237/api/Category", values);
 
                     if(responseMessageUpdate.IsSuccessStatusCode)
@@ -135,10 +147,18 @@ namespace SignalRWebUI.Controllers
                     {
                         return RedirectToAction("Error", "Home");
                     }
-;                }
+                }
                 else
                 {
                     values.Status = true;
+                    /*foreach (var product in valuesProducts)
+                    {
+                        if(product.CategoryID == ID)
+                        {
+                            product.ProductStatus = true;
+                            await client.PutAsJsonAsync("http://localhost:7237/api/Product", product);
+                        }
+                    }*/
                     var responseMessageUpdate = await client.PutAsJsonAsync("http://localhost:7237/api/Category", values);
                     
                     if(responseMessageUpdate.IsSuccessStatusCode)

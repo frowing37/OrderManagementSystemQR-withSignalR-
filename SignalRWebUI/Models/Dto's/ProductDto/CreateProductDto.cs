@@ -1,4 +1,4 @@
-namespace SignalRWebUI.Models.Dto_s.ProductDto;
+namespace SignalRWebUI.Models.Dtos.ProductDto;
 
 public class CreateProductDto
 {

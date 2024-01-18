@@ -1,7 +1,7 @@
 ﻿using System;
-namespace SignalR_Dto.AboutDto
+namespace SignalRWebUI.Models.Dtos.AboutDto
 {
-	public class UpdateAboutDto
+	public class ResultAboutDto
 	{
         public int AboutID { get; set; }
 

@@ -1,0 +1,42 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.AboutDto.UpdateAboutDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Forms</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="About" asp-action="UpdateAbout" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Hakkında Güncelleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <input id="aboutid" type="hidden" asp-for="AboutID">
+                            <input id="aboutstatus" type="hidden" asp-for="Status">
+                            <div class="form-group">
+                                <label for="aboutname">Başlık giriniz</label>
+                                <input id="aboutname" type="text" asp-for="Title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="aboutdescription">Açıklama giriniz</label>
+                                <input id="aboutdescription" type="text" asp-for="Description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="aboutIMGurl">Resim seçiniz</label>
+                                <input id="aboutIMGurl" type="text" asp-for="ImageURL" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -6,6 +6,8 @@ namespace SignalR_Dto.AboutDto
         public int AboutID { get; set; }
 
         public string ImageURL { get; set; }
+        
+        public bool Status { get; set; }
 
         public string Title { get; set; }
 

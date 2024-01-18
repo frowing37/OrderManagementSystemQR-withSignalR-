@@ -7,6 +7,7 @@ namespace SignalR_Dto.AboutDto
 
         public string Title { get; set; }
 
+        public bool Status { get; set; }
         public string Description { get; set; }
     }
 }
