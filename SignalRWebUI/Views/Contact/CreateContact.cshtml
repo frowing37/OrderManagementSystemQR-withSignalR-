@@ -1,0 +1,43 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.ContactDto.CreateContactDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">İletişim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Contact" asp-action="CreateContact" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">İletişim Ekleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="contactname">Adres giriniz</label>
+                                <input id="contactname" type="text" asp-for="Location" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactdescription">Telefon giriniz</label>
+                                <input id="contactdescription" type="tel" asp-for="Phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactIMGurl">Mail giriniz</label>
+                                <input id="contactIMGurl" type="email" asp-for="Mail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactIMGurl">Alt Açıklama giriniz</label>
+                                <input id="contactIMGurl" type="text" asp-for="FooterDescription" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">İletişim Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

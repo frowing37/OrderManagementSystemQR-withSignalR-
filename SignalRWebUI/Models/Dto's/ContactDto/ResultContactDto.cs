@@ -1,11 +1,12 @@
 ﻿using System;
-namespace SignalR_Dto.ContactDto
+namespace SignalRWebUI.Models.Dtos.ContactDto
 {
-	public class CreateContactDto
+	public class ResultContactDto
 	{
-        public string Location { get; set; }
-        
+        public int ContactID { get; set; }
+
         public bool Status { get; set; }
+        public string Location { get; set; }
 
         public string Phone { get; set; }
 

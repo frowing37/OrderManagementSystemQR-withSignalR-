@@ -1,5 +1,5 @@
 ﻿using System;
-namespace SignalR_Dto.ContactDto
+namespace SignalRWebUI.Models.Dtos.ContactDto
 {
 	public class CreateContactDto
 	{

@@ -30,7 +30,7 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetContact")]
+        [HttpGet("{ID}")]
         public IActionResult GetContact(int ID)
         {
             var value = _contactService.GetByIDwS(ID);
@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateContact(CreateContactDto createContactDto)
+        public IActionResult CreateContact([FromBody] CreateContactDto createContactDto)
         {
             Contact contact = new Contact()
             {
@@ -56,11 +56,12 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateContact(UpdateContactDto updateContactDto)
+        public IActionResult UpdateContact([FromBody] UpdateContactDto updateContactDto)
         {
             Contact contact = new Contact()
             {
                 ContactID = updateContactDto.ContactID,
+                Status = updateContactDto.Status,
                 Location = updateContactDto.Location,
                 Phone = updateContactDto.Phone,
                 Mail = updateContactDto.Mail,
@@ -72,7 +73,7 @@ namespace SignalRApi.Controllers
             return Ok("İletişim güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteContact(int ID)
         {
             var value = _contactService.GetByIDwS(ID);

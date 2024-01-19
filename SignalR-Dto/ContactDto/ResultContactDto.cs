@@ -4,6 +4,8 @@ namespace SignalR_Dto.ContactDto
 	public class ResultContactDto
 	{
         public int ContactID { get; set; }
+        
+        public bool Status { get; set; }
 
         public string Location { get; set; }
 
