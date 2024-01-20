@@ -235,6 +235,29 @@ namespace SignalR_DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SignalR_Entities.Concrete.ProductDiscount", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("DiscountID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DiscountID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("ProductDiscounts");
+                });
+
             modelBuilder.Entity("SignalR_Entities.Concrete.SocialMedia", b =>
                 {
                     b.Property<int>("SocialMediaID")
@@ -303,9 +326,38 @@ namespace SignalR_DataAccess.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("SignalR_Entities.Concrete.ProductDiscount", b =>
+                {
+                    b.HasOne("SignalR_Entities.Concrete.Discount", "Discount")
+                        .WithMany("ProductDiscounts")
+                        .HasForeignKey("DiscountID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SignalR_Entities.Concrete.Product", "Product")
+                        .WithMany("ProductDiscounts")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discount");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("SignalR_Entities.Concrete.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SignalR_Entities.Concrete.Discount", b =>
+                {
+                    b.Navigation("ProductDiscounts");
+                });
+
+            modelBuilder.Entity("SignalR_Entities.Concrete.Product", b =>
+                {
+                    b.Navigation("ProductDiscounts");
                 });
 #pragma warning restore 612, 618
         }

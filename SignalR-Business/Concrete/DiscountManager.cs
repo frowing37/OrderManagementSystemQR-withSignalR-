@@ -34,6 +34,16 @@ namespace SignalR_Business.Concrete
             return _discountDAL.GetListAll();
         }
 
+        public List<Discount> GetDiscountswithProductswS()
+        {
+            return _discountDAL.GetDiscountswithProducts();
+        }
+
+        public List<ProductDiscount> GetProductDiscountswS()
+        {
+            return _discountDAL.GetProductDiscounts();
+        }
+
         public void UpdatewS(Discount t)
         {
             _discountDAL.Update(t);

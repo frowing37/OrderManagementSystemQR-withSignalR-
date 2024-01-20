@@ -1,4 +1,6 @@
 ﻿using System;
+using SignalR_Entities.Concrete;
+
 namespace SignalR_Dto.DiscountDto
 {
 	public class UpdateDiscountDto
@@ -12,6 +14,8 @@ namespace SignalR_Dto.DiscountDto
         public string Description { get; set; }
 
         public string ImageURL { get; set; }
+        
+        public List<Product> Products { get; set; }
     }
 }
 

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,18 +19,44 @@ namespace SignalRApi.Controllers
         public DiscountController(IDiscountService discountService, IMapper mapper)
         {
             _discountService = discountService;
-            _mapper = mapper;
+            _mapper = mapper; 
         }
 
         [HttpGet]
         public IActionResult DiscountList()
         {
-            var values = _mapper.Map<List<ResultDiscountDto>>(_discountService.GetListAllwS());
+            //var values = _mapper.Map<List<ResultDiscountDto>>(_discountService.GetDiscountswithProductswS());
+            var tempValues = _discountService.GetDiscountswithProductswS();
+            
+            List<ResultDiscountDto> values = new List<ResultDiscountDto>();
+            
+            foreach (var discount in tempValues)
+            {
+                List<Product> tempProducts = new List<Product>();
 
+                foreach (var product in discount.ProductDiscounts)
+                {
+                    if (product.DiscountID == discount.DiscountID)
+                    {
+                        tempProducts.Add(product.Product);
+                    }
+                }
+
+                values.Add(new ResultDiscountDto()
+                {
+                    DiscountID = discount.DiscountID,
+                    Title = discount.Title,
+                    Amount = discount.Amount,
+                    Description = discount.Description,
+                    ImageURL = discount.ImageURL,
+                    Products = tempProducts
+                });
+            }
+            
             return Ok(values);
         }
 
-        [HttpGet("GetDiscount")]
+        [HttpGet("{ID}")]
         public IActionResult GetDiscount(int ID)
         {
             var value = _discountService.GetByIDwS(ID);
@@ -42,6 +67,8 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
+            List<ProductDiscount> temp = _discountService.GetProductDiscountswS();
+            
             Discount discount = new Discount()
             {
                 DiscountID = updateDiscountDto.DiscountID,
@@ -72,7 +99,7 @@ namespace SignalRApi.Controllers
             return Ok("İndirim oluşturuldu");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteDiscount(int ID)
         {
             var value = _discountService.GetByIDwS(ID);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using SignalR_Entities.Concrete;
 using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.Repositories;
@@ -10,6 +11,22 @@ namespace SignalR_DataAccess.EntityFramework
     {
         public efDiscount(SignalRContext context) : base(context)
         {
+        }
+
+        public List<Discount> GetDiscountswithProducts()
+        {
+            var context = new SignalRContext();
+            var values = context.Discounts.Include(x => x.ProductDiscounts).ToList();
+
+            return values;
+        }
+
+        public List<ProductDiscount> GetProductDiscounts()
+        {
+            var context = new SignalRContext();
+            var values = context.ProductDiscounts.ToList();
+
+            return values;
         }
     }
 }

@@ -16,6 +16,8 @@ namespace SignalR_Dto.ProductDto
         public string ImageURL { get; set; }
 
         public bool ProductStatus { get; set; }
+        
+        public string CategoryName { get; set; }
     }
 }
 

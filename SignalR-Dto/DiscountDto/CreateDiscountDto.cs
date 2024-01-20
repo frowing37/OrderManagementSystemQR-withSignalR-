@@ -10,6 +10,8 @@ namespace SignalR_Dto.DiscountDto
         public string Description { get; set; }
 
         public string ImageURL { get; set; }
+        
+        public List<int> ProductID { get; set; }
     }
 }
 

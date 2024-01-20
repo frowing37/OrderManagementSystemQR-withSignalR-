@@ -5,7 +5,9 @@ namespace SignalR_DataAccess.Abstract
 {
 	public interface IDiscountDAL : IGenericDAL<Discount>
 	{
+		List<Discount> GetDiscountswithProducts();
 
+		List<ProductDiscount> GetProductDiscounts();
 	}
 }
 
