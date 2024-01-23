@@ -2,7 +2,7 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-@model SignalRWebUI.Models.Dtos.ContactDto.UpdateContactDto
+@model SignalRWebUI.Models.Dtos.DiscountDto.UpdateDiscountDto
 
 <div class="content">
     <div class="container-fluid">
@@ -14,24 +14,27 @@
                         <div class="card-header">
                             <div class="card-title">İletişim Güncelleme Sayfası</div>
                         </div>
-                        <input type="hidden" asp-for="ContactID" />
-                        <input type="hidden" asp-for="Status" />
+                        <input type="hidden" asp-for="DiscountID" />
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="contactname">Adres giriniz</label>
-                                <input id="contactname" type="text" asp-for="Location" class="form-control">
+                                <label for="discountname">İndirim Başlığı giriniz</label>
+                                <input id="discountname" type="text" asp-for="Title" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactdescription">Telefon giriniz</label>
-                                <input id="contactdescription" type="tel" asp-for="Phone" class="form-control">
+                                <label for="discountdescription">Telefon giriniz</label>
+                                <input id="discountdescription" type="tel" asp-for="Amount" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactIMGurl">Mail giriniz</label>
-                                <input id="contactIMGurl" type="email" asp-for="Mail" class="form-control">
+                                <label for="discountIMGurl">Mail giriniz</label>
+                                <input id="discountIMGurl" type="email" asp-for="Description" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactIMGurl">Alt Açıklama giriniz</label>
-                                <input id="contactIMGurl" type="text" asp-for="FooterDescription" class="form-control">
+                                <label for="discountIMGurl">Alt Açıklama giriniz</label>
+                                <input id="discountIMGurl" type="text" asp-for="ImageURL" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="discountProduct">İndirimin Uygulanacağı Ürünler</label>
+                                @*@Html.DropDownListFor(x=>x.);*@
                             </div>
                         </div>
                         <div class="card-action">

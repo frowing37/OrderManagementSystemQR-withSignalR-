@@ -1,4 +1,7 @@
 ﻿using System;
+using SignalRWebUI.Models.Dtos.ProductDto;
+using SignalRWebUI.Models.Dtos.CategoryDto;
+
 namespace SignalRWebUI.Models.Dtos.DiscountDto
 {
 	public class CreateDiscountDto
@@ -10,6 +13,7 @@ namespace SignalRWebUI.Models.Dtos.DiscountDto
         public string Description { get; set; }
 
         public string ImageURL { get; set; }
+        
     }
 }
 
