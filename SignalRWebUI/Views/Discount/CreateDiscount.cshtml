@@ -1,6 +1,11 @@
 @{
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    var categoriesList = ViewBag.Categories as List<ResultCategoryDto>;
+    var productsList = ViewBag.Products as List<ResultProductDto>;
 }
+
+@using SignalRWebUI.Models.Dtos.CategoryDto
+@using SignalRWebUI.Models.Dtos.ProductDto
 
 @model SignalRWebUI.Models.Dtos.DiscountDto.CreateDiscountDto
 
@@ -16,24 +21,28 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="contactname">İndirim Başlığı giriniz</label>
-                                <input id="contactname" type="text" asp-for="Title" class="form-control">
+                                <label for="discountname">İndirim Başlığı giriniz</label>
+                                <input id="discountname" type="text" asp-for="Title" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactdescription">Telefon giriniz</label>
-                                <input id="contactdescription" type="tel" asp-for="Amount" class="form-control">
+                                <label for="discountdescription">Telefon giriniz</label>
+                                <input id="discountdescription" type="tel" asp-for="Amount" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactIMGurl">Mail giriniz</label>
-                                <input id="contactIMGurl" type="email" asp-for="Description" class="form-control">
+                                <label for="discountIMGurl">Mail giriniz</label>
+                                <input id="discountIMGurl" type="email" asp-for="Description" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="contactIMGurl">Alt Açıklama giriniz</label>
-                                <input id="contactIMGurl" type="text" asp-for="ImageURL" class="form-control">
+                                <label for="discountIMGurl">Alt Açıklama giriniz</label>
+                                <input id="discountIMGurl" type="text" asp-for="ImageURL" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="discountProduct">İndirimin Uygulanacağı Ürünler</label>
-                                
+                                @Html.DropDownList("Kategoriler", new SelectList(categoriesList),new {@class = "custom-dropdown", @id="selectC", @onchange="updateProducts()"})
+                                @Html.DropDownList("Ürünler", new SelectList(productsList),new {@class = "custom-dropdown", @id="selectP"})
+                                <button id="addList" type="button" onclick="processSelection()" >İndirim Listesine Ekle</button>
+                                <hr/>
+                                <input id="selectedProducts"/>
                             </div>
                         </div>
                         <div class="card-action">
@@ -45,3 +54,62 @@
         </div>
     </div>
 </div>
+
+<style>
+    .custom-dropdown {
+        width: 200px; /* Dropdown genişliği */
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+    
+    .custom-dropdown option:checked {
+        background-color: #007bff;
+        color: #fff;
+    }
+</style>
+
+<script>
+    // Kategori değişikliğine tepki veren fonksiyon
+    function updateProducts() {
+        // Seçili kategori değerini al
+        var selectedCategory = document.getElementById("selectC").value;
+    
+        $ajax({
+        type:"GET",
+        dataType:"json",
+        url:"http://localhost:7237/api/Discount/{selectedCategory}",
+        data:source,
+        success: function (data) {
+            data.cate
+            },
+        error: function (error) {
+            jsonValue = jQuery.parseJSON(error.responseText);
+            alert("error" + error.responseText);
+            }
+        });
+    
+        
+    }
+    
+    // Butona tıklandığında tepki veren fonksiyon
+    function processSelection() {
+        // Seçili ürünlerin ID'lerini tutan bir dizi oluştur
+        var selectedProducts = [];
+    
+        // Seçili ürünleri alma
+        var selectedOptions = document.getElementById("selectP").selectedOptions;
+        
+        // Seçili ürünlerin ID'lerini diziye ekle
+        for (var i = 0; i < selectedOptions.length; i++) {
+            selectedProducts.push(selectedOptions[i].value);
+        }
+    
+        // Seçili ürünlerin ID'lerini ekranda göster
+        console.log("Seçili Ürünler: " + selectedProducts);
+    
+        // Burada gerçek bir post işlemi yapılmalıdır.
+        // Örneğin, bir form elemanına değerleri atayarak formu göndermek gibi.
+    }
+</script>
