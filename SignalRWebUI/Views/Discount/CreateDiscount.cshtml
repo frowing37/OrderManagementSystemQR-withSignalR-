@@ -42,7 +42,8 @@
                                 @Html.DropDownList("Ürünler", new SelectList(productsList),new {@class = "custom-dropdown", @id="selectP"})
                                 <button id="addList" type="button" onclick="processSelection()" >İndirim Listesine Ekle</button>
                                 <hr/>
-                                <input id="selectedProducts"/>
+                                <input id="ProductNames" type="text" />
+                                <input id="ProductIDs" type="hidden" />
                             </div>
                         </div>
                         <div class="card-action">
@@ -71,45 +72,54 @@
 </style>
 
 <script>
-    // Kategori değişikliğine tepki veren fonksiyon
     function updateProducts() {
-        // Seçili kategori değerini al
         var selectedCategory = document.getElementById("selectC").value;
-    
-        $ajax({
-        type:"GET",
-        dataType:"json",
-        url:"http://localhost:7237/api/Discount/{selectedCategory}",
-        data:source,
-        success: function (data) {
-            data.cate
+   
+        class product {
+            constructor(intProductID, strProductName) {
+                this.intProductID = intProductID;
+                this.strProductName = strProductName;
+            }
+        }
+        
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "http://localhost:7237/api/Product",
+            data: source,
+            success: function (data) {
+                
+                const productsByActiveCategory = data.map(item => {
+                    if (item.CategoryID == selectedCategory.value) {
+                        return new product(item.ProductID, item.ProductName);
+                        }
+                });
+        
+                const dropdownListForProducts = $('#selectP');
+                
+                        productsByActiveCategory.forEach(obj => {
+                            dropdownListForProducts.append($('<option>', {
+                                value: obj.intProductID,
+                                text: obj.strProductName
+                            }));
+                        });
             },
-        error: function (error) {
-            jsonValue = jQuery.parseJSON(error.responseText);
-            alert("error" + error.responseText);
+            error: function (error) {
+                const jsonValue = jQuery.parseJSON(error.responseText);
+                alert("error" + error.responseText);
             }
         });
-    
-        
+
     }
     
-    // Butona tıklandığında tepki veren fonksiyon
     function processSelection() {
-        // Seçili ürünlerin ID'lerini tutan bir dizi oluştur
-        var selectedProducts = [];
-    
-        // Seçili ürünleri alma
+        
         var selectedOptions = document.getElementById("selectP").selectedOptions;
         
-        // Seçili ürünlerin ID'lerini diziye ekle
+        var selectedProducts = [];
+        
         for (var i = 0; i < selectedOptions.length; i++) {
             selectedProducts.push(selectedOptions[i].value);
         }
-    
-        // Seçili ürünlerin ID'lerini ekranda göster
-        console.log("Seçili Ürünler: " + selectedProducts);
-    
-        // Burada gerçek bir post işlemi yapılmalıdır.
-        // Örneğin, bir form elemanına değerleri atayarak formu göndermek gibi.
     }
 </script>
