@@ -30,7 +30,7 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetFeature")]
+        [HttpGet("{ID}")]
         public IActionResult GetFeature(int ID)
         {
             var value = _featureService.GetByIDwS(ID);
@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateFeature(CreateFeatureDto createFeatureDto)
+        public IActionResult CreateFeature([FromBody] CreateFeatureDto createFeatureDto)
         {
             Feature feature = new Feature()
             {
@@ -57,7 +57,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateFeature(UpdateFeatureDto updateFeatureDto)
+        public IActionResult UpdateFeature([FromBody] UpdateFeatureDto updateFeatureDto)
         {
             Feature feature = new Feature()
             {
@@ -75,7 +75,7 @@ namespace SignalRApi.Controllers
             return Ok("Özellik güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteFeature(int ID)
         {
             var value = _featureService.GetByIDwS(ID);

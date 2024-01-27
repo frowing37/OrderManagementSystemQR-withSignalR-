@@ -1,0 +1,51 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.FeatureDto.UpdateFeatureDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Öne Çıkan İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Feature" asp-action="UpdateFeature" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Öne Çıkan Güncelleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="featuretitle1">1.Başlığı giriniz</label>
+                                <input id="featuretitle1" type="text" asp-for="Title1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes1">1.Açıklamayı giriniz</label>
+                                <input id="featuredes1" type="text" asp-for="Description1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle2">2.Başlığı giriniz</label>
+                                <input id="featuretitle2" type="text" asp-for="Title2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes2">2.Açıklamayı giriniz</label>
+                                <input id="featuredes2" type="text" asp-for="Description2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle3">3.Başlığı giriniz</label>
+                                <input id="featuretitle3" type="text" asp-for="Title3" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes3">3.Açıklamayı giriniz</label>
+                                <input id="featuredes3" type="text" asp-for="Description3" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Öne Çıkanı Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
