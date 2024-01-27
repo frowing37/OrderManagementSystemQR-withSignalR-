@@ -1,0 +1,43 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.TestimonialDto.ResultTestimonialDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Referans İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Testimonial" asp-action="CreateTestimonial" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Referans Ekleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="featuretitle1">Referans Adı giriniz</label>
+                                <input id="featuretitle1" type="text" asp-for="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes1">Referans Başlığı giriniz</label>
+                                <input id="featuredes1" type="text" asp-for="Title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle1">Referans Yorumu giriniz</label>
+                                <input id="featuretitle1" type="text" asp-for="Comment" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle1">Resim Url giriniz</label>
+                                <input id="featuretitle1" type="text" asp-for="Comment" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Referans Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
