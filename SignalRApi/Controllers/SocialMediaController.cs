@@ -30,7 +30,7 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetSocialMedia")]
+        [HttpGet("{ID}")]
         public IActionResult GetSocialMedia(int ID)
         {
             var value = _socialMediaService.GetByIDwS(ID);
@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateSocialMedia(CreateSocialMediaDto createSocialMediaDto)
+        public IActionResult CreateSocialMedia([FromBody] CreateSocialMediaDto createSocialMediaDto)
         {
             SocialMedia socialMedia = new SocialMedia()
             {
@@ -54,7 +54,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateSocialMedia(UpdateSocialMediaDto updateSocialMediaDto)
+        public IActionResult UpdateSocialMedia([FromBody] UpdateSocialMediaDto updateSocialMediaDto)
         {
             SocialMedia socialMedia = new SocialMedia()
             {
@@ -69,7 +69,7 @@ namespace SignalRApi.Controllers
             return Ok("Medya güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteSocialMedia(int ID)
         {
             var value = _socialMediaService.GetByIDwS(ID);

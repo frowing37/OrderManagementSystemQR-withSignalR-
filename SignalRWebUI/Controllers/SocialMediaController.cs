@@ -42,12 +42,12 @@ public class SocialMediaController : Controller
     public async Task<IActionResult> CreateSocialMedia(CreateSocialMediaDto createSocialMediaDto)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/SocialMediaDto", createSocialMediaDto);
+        var responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/SocialMedia", createSocialMediaDto);
 
         if(responseMessage.IsSuccessStatusCode)
         {
             return RedirectToAction("Index", "SocialMedia");
-        }
+        }   
         else
         {
             return RedirectToAction("Error", "Home");
@@ -100,7 +100,7 @@ public class SocialMediaController : Controller
         }
         else
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Error", "Home");
         }
     }
 

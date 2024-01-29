@@ -16,27 +16,27 @@ namespace SignalR_Business.Concrete
 
         public void AddwS(Feature t)
         {
-            throw new NotImplementedException();
+            _featureDAL.Insert(t);
         }
 
         public void DeletewS(Feature t)
         {
-            throw new NotImplementedException();
+            _featureDAL.Delete(t);
         }
 
         public Feature GetByIDwS(int ID)
         {
-            throw new NotImplementedException();
+            return _featureDAL.GetByID(ID);
         }
 
         public List<Feature> GetListAllwS()
         {
-            throw new NotImplementedException();
+            return _featureDAL.GetListAll();
         }
 
         public void UpdatewS(Feature t)
         {
-            throw new NotImplementedException();
+            _featureDAL.Update(t);
         }
     }
 }

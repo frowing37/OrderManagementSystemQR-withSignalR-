@@ -30,7 +30,7 @@ namespace SignalRApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetTestimonial")]
+        [HttpGet("{ID}")]
         public IActionResult GetTestimonial(int id)
         {
             var values = _testimonialService.GetListAllwS();
@@ -39,7 +39,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
+        public IActionResult CreateTestimonial([FromBody] CreateTestimonialDto createTestimonialDto)
         {
             Testimonial testimonial = new Testimonial()
             {
@@ -56,7 +56,7 @@ namespace SignalRApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
+        public IActionResult UpdateTestimonial([FromBody] UpdateTestimonialDto updateTestimonialDto)
         {
             Testimonial testimonial = new Testimonial()
             {
@@ -73,7 +73,7 @@ namespace SignalRApi.Controllers
             return Ok("Referans güncellendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{ID}")]
         public IActionResult DeleteTestimonial(int ID)
         {
             var value = _testimonialService.GetByIDwS(ID);
