@@ -16,4 +16,3 @@ namespace SignalRWebUI.Models.Dtos.TestimonialDto
         public bool Status { get; set; }
     }
 }
-

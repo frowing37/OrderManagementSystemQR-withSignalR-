@@ -33,7 +33,7 @@ namespace SignalRApi.Controllers
         [HttpGet("{ID}")]
         public IActionResult GetTestimonial(int id)
         {
-            var values = _testimonialService.GetListAllwS();
+            var values = _testimonialService.GetByIDwS(id);
 
             return Ok(values);
         }

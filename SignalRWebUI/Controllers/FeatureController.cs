@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalRWebUI.Models.Dtos.FeatureDto;
@@ -58,10 +59,15 @@ public class FeatureController : Controller
     public async Task<IActionResult> UpdateFeature(int ID)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("http://localhost:7237/api/Feature/{ID}");
+        var responseMessage = await client.GetAsync($"http://localhost:7237/api/Feature/{ID}");
 
         if (responseMessage.IsSuccessStatusCode)
         {
+            if (responseMessage.StatusCode == HttpStatusCode.NoContent)
+            {
+                return RedirectToAction("noContent", "Home");
+            }
+            
             var json = await responseMessage.Content.ReadAsStringAsync();
             var value = JsonConvert.DeserializeObject<UpdateFeatureDto>(json);
 
@@ -92,7 +98,7 @@ public class FeatureController : Controller
     public async Task<IActionResult> DeleteFeature(int ID)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.DeleteAsync("http://localhost:7237/api/Feature/{ID}");
+        var responseMessage = await client.DeleteAsync($"http://localhost:7237/api/Feature/{ID}");
 
         if (responseMessage.IsSuccessStatusCode)
         {

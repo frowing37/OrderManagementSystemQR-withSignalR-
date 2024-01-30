@@ -58,7 +58,7 @@ public class SocialMediaController : Controller
     public async Task<IActionResult> UpdateSocialMedia(int ID)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("http://localhost:7237/api/SocialMedia/{ID}");
+        var responseMessage = await client.GetAsync($"http://localhost:7237/api/SocialMedia/{ID}");
 
         if (responseMessage.IsSuccessStatusCode)
         {
@@ -92,7 +92,7 @@ public class SocialMediaController : Controller
     public async Task<IActionResult> DeleteSocialMedia(int ID)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.DeleteAsync("http://localhost:7237/api/SocialMedia/{ID}");
+        var responseMessage = await client.DeleteAsync($"http://localhost:7237/api/SocialMedia/{ID}");
 
         if (responseMessage.IsSuccessStatusCode)
         {
