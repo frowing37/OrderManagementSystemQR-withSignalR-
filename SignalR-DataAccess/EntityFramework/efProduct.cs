@@ -20,6 +20,12 @@ namespace SignalR_DataAccess.EntityFramework
 
             return values;
         }
+
+        public int getProductCount()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Count();
+        }
     }
 }
 

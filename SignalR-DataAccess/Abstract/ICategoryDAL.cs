@@ -5,7 +5,7 @@ namespace SignalR_DataAccess.Abstract
 {
 	public interface ICategoryDAL : IGenericDAL<Category>
 	{
-
+		int getCategoryCount();
 	}
 }
 

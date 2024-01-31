@@ -11,6 +11,12 @@ namespace SignalR_DataAccess.EntityFramework
         public efCategory(SignalRContext context) : base(context)
         {
         }
+
+        public int getCategoryCount()
+        {
+            using var context = new SignalRContext();
+            return context.Categories.Count();
+        }
     }
 }
 

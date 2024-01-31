@@ -6,6 +6,8 @@ namespace SignalR_DataAccess.Abstract
 	public interface IProductDAL : IGenericDAL<Product>
 	{
 		List<Product> GetProductswithCategories();
+
+		int getProductCount();
 	}
 }
 

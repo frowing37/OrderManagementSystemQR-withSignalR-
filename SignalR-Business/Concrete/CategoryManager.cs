@@ -34,6 +34,11 @@ namespace SignalR_Business.Concrete
             return _categoryDAL.GetListAll();
         }
 
+        public int getCategoryCountwS()
+        {
+            return _categoryDAL.getCategoryCount();
+        }
+
         public void UpdatewS(Category t)
         {
             _categoryDAL.Update(t);

@@ -39,6 +39,11 @@ namespace SignalR_Business.Concrete
             return _productDAL.GetProductswithCategories();
         }
 
+        public int getProductCountwS()
+        {
+            return _productDAL.getProductCount();
+        }
+
         public void UpdatewS(Product t)
         {
             _productDAL.Update(t);
