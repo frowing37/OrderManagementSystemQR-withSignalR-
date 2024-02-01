@@ -4,6 +4,7 @@ using SignalR_Business.Concrete;
 using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.EntityFramework;
 using System.Reflection;
+using SignalR_Entities.Concrete;
 using SignalRApi.Hub;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +41,11 @@ builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
 builder.Services.AddScoped<ISocialMediaDAL, efSocialMedia>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<ITestimonialDAL, efTestimonial>();
+builder.Services.AddScoped<IOrderService, OrderManager>();
+builder.Services.AddScoped<IOrderDAL, efOrder>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailManager>();
+builder.Services.AddScoped<IOrderDetailDAL, efOrderDetail>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
