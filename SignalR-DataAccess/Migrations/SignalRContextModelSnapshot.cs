@@ -214,6 +214,9 @@ namespace SignalR_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<int>("TableNumber")
                         .HasColumnType("int");
 

@@ -37,4 +37,14 @@ public class OrderManager : IOrderService
     {
         return _orderDAL.GetListAll();
     }
+
+    public int TotalOrderCountwS()
+    {
+        return _orderDAL.TotalOrderCount();
+    }
+
+    public int ActiveOrderCountwS()
+    {
+        return _orderDAL.ActiveOrderCount();
+    }
 }

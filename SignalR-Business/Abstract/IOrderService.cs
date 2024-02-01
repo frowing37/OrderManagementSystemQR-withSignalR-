@@ -4,5 +4,7 @@ namespace SignalR_Business.Abstract;
 
 public interface IOrderService : IGenericService<Order>
 {
+    int TotalOrderCountwS();
     
+    int ActiveOrderCountwS();
 }

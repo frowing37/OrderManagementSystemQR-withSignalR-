@@ -10,4 +10,16 @@ public class efOrder : GenericRepository<Order>, IOrderDAL
     public efOrder(SignalRContext context) : base(context)
     {
     }
+
+    public int TotalOrderCount()
+    {
+        using var context = new SignalRContext();
+        return context.Orders.Count();
+    }
+
+    public int ActiveOrderCount()
+    {
+        using var context = new SignalRContext();
+        return context.Orders.Where(o => o.Status == true).Count();
+    }
 }
