@@ -6,6 +6,10 @@ namespace SignalR_Business.Abstract
 	public interface ICategoryService : IGenericService<Category>
 	{
 		int getCategoryCountwS();
+
+		int getActiveCategoryCountwS();
+		
+		int getPassiveCategoryCountwS();
 	}
 }
 

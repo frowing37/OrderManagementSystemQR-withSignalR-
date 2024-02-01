@@ -44,6 +44,36 @@ namespace SignalR_Business.Concrete
             return _productDAL.getProductCount();
         }
 
+        public int getProductCountCategoryByDrinkwS()
+        {
+            return _productDAL.getProductCountByCategoryDrink();
+        }
+
+        public int getProductCountCategoryByBurgerwS()
+        {
+            return _productDAL.getProductCountByCategoryHamburger();
+        }
+
+        public decimal getDrinkAveragePricewS()
+        {
+            return _productDAL.getDrinkAveragePrice();
+        }
+
+        public decimal getBurgerAveragePricewS()
+        {
+            return _productDAL.getBurgerAveragePrice();
+        }
+
+        public string getProductByMaxPricewS()
+        {
+            return _productDAL.getProductByMaxPrice();
+        }
+
+        public string getProductByMinPricewS()
+        {
+            return _productDAL.getProductByMinPrice();
+        }
+
         public void UpdatewS(Product t)
         {
             _productDAL.Update(t);

@@ -26,6 +26,52 @@ namespace SignalR_DataAccess.EntityFramework
             using var context = new SignalRContext();
             return context.Products.Count();
         }
+
+        public int getProductCountByCategoryHamburger()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p =>
+                p.CategoryID == (context.Categories.Where(c => c.Name == "Burger").Select(c => c.CategoryID)
+                    .FirstOrDefault())).Count();
+        }
+
+        public decimal getBurgerAveragePrice()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p =>
+                p.CategoryID == (context.Categories.Where(c => c.Name == "Burger").Select(c => c.CategoryID)
+                    .FirstOrDefault())).Average(x => x.Price);
+        }
+
+        public decimal getDrinkAveragePrice()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p =>
+                p.CategoryID == (context.Categories.Where(c => c.Name == "İçecek").Select(c => c.CategoryID)
+                    .FirstOrDefault())).Average(x => x.Price);
+        }
+
+        public string getProductByMinPrice()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p => p.Price == (context.Products.Min(p => p.Price)))
+                .Select(n => n.ProductName).FirstOrDefault();
+        }
+
+        public string getProductByMaxPrice()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p => p.Price == (context.Products.Max(p => p.Price)))
+                .Select(n => n.ProductName).FirstOrDefault();
+        }
+
+        public int getProductCountByCategoryDrink()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Where(p =>
+                p.CategoryID == (context.Categories.Where(c => c.Name == "İçecek").Select(c => c.CategoryID)
+                    .FirstOrDefault())).Count();
+        }
     }
 }
 

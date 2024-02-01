@@ -8,6 +8,18 @@ namespace SignalR_Business.Abstract
 		List<Product> GetProductswithCategorieswS();
 
 		int getProductCountwS();
+		
+		int getProductCountCategoryByDrinkwS();
+
+		int getProductCountCategoryByBurgerwS();
+		
+		decimal getDrinkAveragePricewS();
+		
+		decimal getBurgerAveragePricewS();
+
+		string getProductByMaxPricewS();
+		
+		string getProductByMinPricewS();
 	}
 }
 

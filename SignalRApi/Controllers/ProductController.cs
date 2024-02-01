@@ -48,6 +48,54 @@ namespace SignalRApi.Controllers
             return Ok(count);
         }
 
+        [HttpGet("ProductCountCategoryByDrink")]
+        public IActionResult GetProductCountByCategoryDrink()
+        {
+            var count = _productService.getProductCountCategoryByDrinkwS();
+
+            return Ok(count);
+        }
+        
+        [HttpGet("ProductCountByCategoryBurger")]
+        public IActionResult GetProductCountByCategoryBurger()
+        {
+            var count = _productService.getProductCountCategoryByBurgerwS();
+
+            return Ok(count);
+        }
+
+        [HttpGet("DrinkAveragePrice")]
+        public IActionResult GetDrinkAveragePrice()
+        {
+            var count = _productService.getDrinkAveragePricewS();
+
+            return Ok(count);
+        }
+        
+        [HttpGet("BurgerAveragePrice")]
+        public IActionResult GetBurgerAveragePrice()
+        {
+            var count = _productService.getBurgerAveragePricewS();
+
+            return Ok(count);
+        }
+
+        [HttpGet("GetProductMinPrice")]
+        public IActionResult GetProductMinPrice()
+        {
+            var count = _productService.getProductByMinPricewS();
+
+            return Ok(count);
+        }
+        
+        [HttpGet("GetProductMaxPrice")]
+        public IActionResult GetProductMaxPrice()
+        {
+            var count = _productService.getProductByMaxPricewS();
+
+            return Ok(count);
+        }
+
         [HttpGet("ProductListwithCategories")]
         public IActionResult ProductListwithCategories()
         {
@@ -55,7 +103,6 @@ namespace SignalRApi.Controllers
             
             return Ok(values);
         }
-
 
         [HttpPost]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)

@@ -44,6 +44,20 @@ namespace SignalRApi.Controllers
             var count = _categoryService.getCategoryCountwS();
             return Ok(count);
         }
+        
+        [HttpGet("ActiveCategoryCount")]
+        public IActionResult GetActiveCategoryCount()
+        {
+            var count = _categoryService.getActiveCategoryCountwS();
+            return Ok(count);
+        }
+        
+        [HttpGet("PassiveCategoryCount")]
+        public IActionResult GetPassiveCategoryCount()
+        {
+            var count = _categoryService.getPassiveCategoryCountwS();
+            return Ok(count);
+        }
 
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CreateCategoryDto createCategoryDto)

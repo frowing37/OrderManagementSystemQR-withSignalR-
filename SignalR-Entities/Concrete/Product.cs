@@ -24,6 +24,8 @@ namespace SignalR_Entities.Concrete
 		public Category Category { get; set; }
 		
 		public List<ProductDiscount> ProductDiscounts { get; set; }
+		
+		public List<OrderDetail> OrderDetails { get; set; }
 	}
 }
 
