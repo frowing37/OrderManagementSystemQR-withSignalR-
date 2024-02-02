@@ -22,4 +22,10 @@ public class efOrder : GenericRepository<Order>, IOrderDAL
         using var context = new SignalRContext();
         return context.Orders.Where(o => o.Status == true).Count();
     }
+
+    public decimal LastOrderPrice()
+    {
+        using var context = new SignalRContext();
+        return context.Orders.OrderByDescending(o => o.OrderID).Take(1).Select(o => o.TotalPrice).FirstOrDefault();
+    }
 }

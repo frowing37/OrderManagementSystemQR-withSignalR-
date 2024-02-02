@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Net.Mime;
 using System.Runtime.InteropServices.JavaScript;
 
 namespace SignalR_Entities.Concrete;

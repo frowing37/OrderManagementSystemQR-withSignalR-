@@ -7,4 +7,6 @@ public interface IOrderDAL : IGenericDAL<Order>
     int TotalOrderCount();
 
     int ActiveOrderCount();
+
+    decimal LastOrderPrice();
 }

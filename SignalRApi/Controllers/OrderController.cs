@@ -10,17 +10,17 @@ namespace SignalRApi.Controllers
     [Route("api/[controller]")]
     public class OrderController : Controller
     {
-        private readonly OrderManager _orderManager;
+        private readonly IOrderService _orderService;
 
-        public OrderController(OrderManager orderManager)
+        public OrderController(IOrderService orderService)
         {
-            _orderManager = orderManager;
+            _orderService = orderService;
         }
         
         [HttpGet("TotalOrderCount")]
         public IActionResult GetTotalOrderCount()
         {
-            var count = _orderManager.TotalOrderCountwS();
+            var count = _orderService.TotalOrderCountwS();
 
             return Ok(count);
         }
@@ -28,7 +28,15 @@ namespace SignalRApi.Controllers
         [HttpGet("ActiveOrderCount")]
         public IActionResult GetActiveOrderCount()
         {
-            var count = _orderManager.ActiveOrderCountwS();
+            var count = _orderService.ActiveOrderCountwS();
+
+            return Ok(count);
+        }
+        
+        [HttpGet("LastOrderPrice")]
+        public IActionResult GetLastOrderPrice()
+        {
+            var count = _orderService.LastOrderPrice();
 
             return Ok(count);
         }
