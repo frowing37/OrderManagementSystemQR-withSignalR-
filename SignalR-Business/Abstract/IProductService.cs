@@ -12,6 +12,8 @@ namespace SignalR_Business.Abstract
 		int getProductCountCategoryByDrinkwS();
 
 		int getProductCountCategoryByBurgerwS();
+
+		decimal getProductPriceAveragewS();
 		
 		decimal getDrinkAveragePricewS();
 		

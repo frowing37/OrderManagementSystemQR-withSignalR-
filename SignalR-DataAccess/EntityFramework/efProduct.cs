@@ -51,6 +51,12 @@ namespace SignalR_DataAccess.EntityFramework
                     .FirstOrDefault())).Average(x => x.Price);
         }
 
+        public decimal getProductPriceAverage()
+        {
+            using var context = new SignalRContext();
+            return context.Products.Average(p => p.Price);
+        }
+
         public string getProductByMinPrice()
         {
             using var context = new SignalRContext();

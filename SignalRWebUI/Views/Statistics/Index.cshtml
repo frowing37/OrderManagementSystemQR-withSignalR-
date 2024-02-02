@@ -1,0 +1,408 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.14/dist/browser/signalr.min.js"></script>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <script type="text/javascript">
+                    $(document).ready(() => {
+                        var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:7237/SignalRHub").build();
+                        $("#connstatus").text(connection.state);
+                        connection.start().then(() => {
+                            $("#connstatus").text(connection.state);
+                            setInterval(()=>{
+                                connection.invoke("SendStatistics");
+                                },1000);
+                        }).catch((err) => { console.log(err) });
+						
+                        connection.on("ReceiveCategoryCount", (value)=>{
+                            $("#categorycount").text(value);
+                        });
+						
+						connection.on("ReceiveProductCount", (value2)=>{
+							$("#productcount").text(value2);
+						});
+						
+						connection.on("ReceiveActiveCategoryCount", (value3)=>{
+							$("#ActiveCategorycount").text(value3);
+						});
+						
+						connection.on("ReceivePassiveCategoryCount", (value4)=>{
+							$("#PassiveCategoryCount").text(value4);
+						});
+						
+						connection.on("ReceiveProductCountCategoryByBurger", (value5)=>{
+							$("#ProductCountCategoryByBurger").text(value5);
+						});
+						
+						connection.on("ReceiveProductCountCategoryByDrink", (value6)=>{
+							$("#ProductCountCategoryByDrink").text(value6);
+						});
+						
+						connection.on("ReceiveProductPriceAverage", (value7)=>{
+							$("#ProductPriceAverage").text(value7);
+						});
+						
+						connection.on("ReceiveProductByMinPrice", (value8)=>{
+							$("#ProductByMinPrice").text(value8);
+						});
+						
+						connection.on("ReceiveProductByMaxPrice", (value9)=>{
+							$("#ProductByMaxPrice").text(value9);
+						});
+						
+						connection.on("ReceiveBurgerAveragePrice", (value10)=>{
+							$("#BurgerAveragePrice").text(value10);
+						});
+						
+						connection.on("ReceiveDrinkAveragePrice", (value11)=>{
+							$("#DrinkAveragePrice").text(value11);
+						});
+						
+						connection.on("ReceiveTotalOrderCount", (value12)=>{
+							$("#TotalOrderCount").text(value12);
+						});
+						
+						connection.on("ReceiveLastOrderPrice", (value13)=>{
+							$("#LastOrderPrice").text(value13);
+						});
+						
+						connection.on("ReceiveActiveOrderCount", (value14)=>{
+							$("#ActiveOrderCount").text(value14);
+						});
+						
+						connection.on("ReceiveTotalMoneyCaseAmount", (value15)=>{
+							$("#TotalMoneyCaseAmount").text(value15);
+						});
+						
+						connection.on("ReceiveMenuTableCount", (value16)=>{
+							$("#MenuTableCount").text(value16);
+						});
+                    });
+                </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+<div class="container-fluid">
+	<h4 class="page-title">Dashboard</h4>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card card-stats card-warning">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-users"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Kategori Sayısı</p>
+								<h4 class="card-title" id="categorycount"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-success">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-bar-chart"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Ürün Sayısı</p>
+								<h4 class="card-title" id="productcount"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-danger">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-newspaper-o"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Aktif Kategori Sayısı</p>
+								<h4 class="card-title" id="ActiveCategorycount"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-primary">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-check-circle"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Pasif Kategori Sayısı</p>
+								<h4 class="card-title" id="PassiveCategoryCount"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-warning">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-users"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Burger Ürünlerinin Sayısı</p>
+								<h4 class="card-title" id="ProductCountCategoryByBurger"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-success">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-bar-chart"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">İçecek Ürün Sayısı</p>
+								<h4 class="card-title" id="ProductCountCategoryByDrink"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-danger">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-newspaper-o"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Ortalama Ürün Fiyatı</p>
+								<h4 class="card-title" id="ProductPriceAverage"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-primary">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-check-circle"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">En Ucuz Ürün</p>
+								<h4 class="card-title" id="ProductByMinPrice"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-warning">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-users"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">En Pahalı Ürün</p>
+								<h4 class="card-title" id="ProductByMaxPrice"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card card-stats card-success">
+				<div class="card-body ">
+					<div class="row">
+						<div class="col-5">
+							<div class="icon-big text-center">
+								<i class="la la-bar-chart"></i>
+							</div>
+						</div>
+						<div class="col-7 d-flex align-items-center">
+							<div class="numbers">
+								<p class="card-category">Ortalama Burger Fiyatı</p>
+								<h4 class="card-title" id="BurgerAveragePrice"></h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-danger">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-newspaper-o"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Ortalama İçecek Fiyatı</p>
+							<h4 class="card-title" id="DrinkAveragePrice"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-primary">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-check-circle"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Toplam Sipariş Sayısı</p>
+							<h4 class="card-title" id="TotalOrderCount"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-warning">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-users"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Son Sipariş Fiyatı</p>
+							<h4 class="card-title" id="LastOrderPrice"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-success">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-bar-chart"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Aktif Sipariş Sayısı</p>
+							<h4 class="card-title" id="ActiveOrderCount"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-danger">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-newspaper-o"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Toplam Kasa İşlemi</p>
+							<h4 class="card-title" id="TotalMoneyCaseAmount"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <div class="col-md-3">
+		<div class="card card-stats card-primary">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-check-circle"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Masa Sayısı</p>
+							<h4 class="card-title" id="MenuTableCount"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+</div>

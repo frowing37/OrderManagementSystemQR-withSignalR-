@@ -16,6 +16,7 @@ namespace SignalR_DataAccess.Abstract
 		decimal getBurgerAveragePrice();
 
 		decimal getDrinkAveragePrice();
+		decimal getProductPriceAverage();
 
 		string getProductByMinPrice();
 		

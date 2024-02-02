@@ -54,6 +54,11 @@ namespace SignalR_Business.Concrete
             return _productDAL.getProductCountByCategoryHamburger();
         }
 
+        public decimal getProductPriceAveragewS()
+        {
+            return _productDAL.getProductPriceAverage();
+        }
+
         public decimal getDrinkAveragePricewS()
         {
             return _productDAL.getDrinkAveragePrice();
