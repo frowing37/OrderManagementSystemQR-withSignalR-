@@ -1,6 +1,4 @@
-using ASP;
 using SignalR_Business.Abstract;
-using SignalR_DataAccess.Concrete;
 
 namespace SignalRApi.Hub;
 
@@ -77,5 +75,17 @@ public class SignalRHub : Hub
           var value16 = _menuTableService.getMenuTableCountwS();
           await Clients.All.SendAsync("ReceiveMenuTableCount", value16);
           
+     }
+
+     public async Task ProgressBar()
+     {
+          var value = _moneyCaseService.TotalMoneyCaseAmountwS();
+          await Clients.All.SendAsync("ReceiveTotalMoneyCaseAmount2", value.ToString() + "₺");
+
+          var value2 = _menuTableService.getMenuTableCountwS();
+          await Clients.All.SendAsync("ReceiveMenuTableCount2", value2);
+
+          var value3 = _orderService.ActiveOrderCountwS();
+          await Clients.All.SendAsync("ReceiveActiveOrderCount2", value3);
      }
 }

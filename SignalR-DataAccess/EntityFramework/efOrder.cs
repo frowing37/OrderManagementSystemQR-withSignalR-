@@ -20,7 +20,7 @@ public class efOrder : GenericRepository<Order>, IOrderDAL
     public int ActiveOrderCount()
     {
         using var context = new SignalRContext();
-        return context.Orders.Where(o => o.Status == true).Count();
+        return context.Orders.Where(o => o.Status == false).Count();
     }
 
     public decimal LastOrderPrice()
