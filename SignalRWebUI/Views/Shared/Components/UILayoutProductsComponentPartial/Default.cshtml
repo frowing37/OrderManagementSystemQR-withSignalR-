@@ -1,0 +1,34 @@
+@model List<SignalRWebUI.Models.Dtos.ProductDto.ResultProductDto>
+
+<div class="filters-content">
+<div class="row grid">
+@foreach (var product in Model)
+{
+    if (@product.ProductStatus)
+    {
+        <div class="col-sm-6 col-lg-4 all pizza">
+            <div class="box">
+                <div>
+                    <div class="img-box">
+                        <img src="@product.ImageURL" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            @product.ProductName
+                        </h5>
+                        <p>
+                            @product.Description
+                        </p>
+                        <div class="options">
+                            <h6>
+                                @product.Price ₺
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+</div>
+</div>

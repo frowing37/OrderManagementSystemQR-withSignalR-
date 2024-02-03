@@ -1,0 +1,19 @@
+@{
+    Layout = "/Views/Shared/UILayout2.cshtml";
+}
+
+<!-- food section -->
+<section class="food_section layout_padding-bottom">
+<div class="container">
+<div class="heading_container heading_center">
+  <h2>
+    Menülerimiz
+  </h2>
+</div>
+
+@await Component.InvokeAsync("UILayoutMenuCategoryComponentPartial")
+
+@await Component.InvokeAsync("UILayoutProductsComponentPartial")
+</div>
+</section>
+<!-- end food section -->

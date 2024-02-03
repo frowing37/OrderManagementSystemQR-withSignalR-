@@ -13,18 +13,18 @@ namespace SignalR_DataAccess.EntityFramework
         {
         }
 
-        public List<Discount> GetDiscountswithProducts()
+        /*public List<Discount> GetDiscountswithProducts()
         {
             var context = new SignalRContext();
             var values = context.Discounts.Include(x => x.ProductDiscounts).ToList();
 
             return values;
-        }
+        }*/
 
-        public List<ProductDiscount> GetProductDiscounts()
+        public List<Discount> GetDiscountswithProduct()
         {
-            var context = new SignalRContext();
-            var values = context.ProductDiscounts.ToList();
+            using var context = new SignalRContext();
+            var values = context.Discounts.Include(x => x.Product).ToList();
 
             return values;
         }

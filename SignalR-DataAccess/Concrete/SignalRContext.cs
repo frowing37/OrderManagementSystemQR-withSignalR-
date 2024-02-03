@@ -26,7 +26,6 @@ namespace SignalR_DataAccess.Concrete
         public DbSet<SocialMedia> SocialMedias { get; set; }
 
         public DbSet<Testimonial> Testimonials { get; set; }
-        public DbSet<ProductDiscount> ProductDiscounts { get; set; }
         public DbSet<Order> Orders { get; set; }
         
         public DbSet<OrderDetail> OrderDetails { get; set; }

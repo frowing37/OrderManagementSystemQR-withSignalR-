@@ -1,0 +1,36 @@
+@{
+    Layout = "/Views/Shared/UILayout2.cshtml";
+}
+
+@model List<SignalRWebUI.Models.Dtos.AboutDto.ResultAboutDto>
+
+<!-- about section -->
+
+<section class="about_section layout_padding">
+    <div class="container  ">
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="img-box">
+                    <img src="@Model[0].ImageURL" alt="">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <h2>
+                            @Model[0].Title
+                        </h2>
+                    </div>
+                    <p>
+                        @Model[0].Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end about section -->
+
+ @await Component.InvokeAsync("UILayoutTestimonialComponentPartial")

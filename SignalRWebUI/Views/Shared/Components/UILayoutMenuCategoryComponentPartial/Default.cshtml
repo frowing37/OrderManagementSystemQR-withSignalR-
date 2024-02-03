@@ -1,0 +1,9 @@
+@model List<SignalRWebUI.Models.Dtos.CategoryDto.ResultCategoryDto>
+
+<ul class="filters_menu">
+  <li class="active">Hepsi</li>
+  @foreach (var category in Model)
+  {
+    <li>@category.Name</li>
+  }
+</ul>

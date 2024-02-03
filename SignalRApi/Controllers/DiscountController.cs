@@ -25,12 +25,12 @@ namespace SignalRApi.Controllers
         [HttpGet]
         public IActionResult DiscountList()
         {
-            //var values = _mapper.Map<List<ResultDiscountDto>>(_discountService.GetDiscountswithProductswS());
-            var tempValues = _discountService.GetDiscountswithProductswS();
+            var values = _mapper.Map<List<ResultDiscountDto>>(_discountService.GetDiscountswithProductwS());
+            //var tempValues = _discountService.GetDiscountswithProductswS();
             
-            List<ResultDiscountDto> values = new List<ResultDiscountDto>();
+            //List<ResultDiscountDto> values = new List<ResultDiscountDto>();
             
-            foreach (var discount in tempValues)
+            /*foreach (var discount in tempValues)
             {
                 List<Product> tempProducts = new List<Product>();
 
@@ -51,7 +51,7 @@ namespace SignalRApi.Controllers
                     ImageURL = discount.ImageURL,
                     Products = tempProducts
                 });
-            }
+            }*/
             
             return Ok(values);
         }
@@ -67,7 +67,7 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
-            List<ProductDiscount> temp = _discountService.GetProductDiscountswS();
+            List<Discount> temp = _discountService.GetDiscountswithProductwS();
             
             Discount discount = new Discount()
             {

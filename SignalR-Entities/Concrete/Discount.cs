@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SignalR_Entities.Concrete
 {
 	public class Discount
@@ -13,7 +15,11 @@ namespace SignalR_Entities.Concrete
 
 		public string ImageURL { get; set; }
 		
-		public List<ProductDiscount> ProductDiscounts { get; set; }
+		[ForeignKey("Product")]
+		
+		public int ProductID { get; set; }
+		
+		public Product Product { get; set; }
 	}
 }
 

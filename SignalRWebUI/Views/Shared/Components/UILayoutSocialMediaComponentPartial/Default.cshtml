@@ -1,0 +1,31 @@
+@model List<SignalRWebUI.Models.Dtos.SocialMediaDto.ResultSocialMediaDto>
+
+<div class="footer_social">
+  <a href="">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+  </a>
+  @foreach (var social in Model)
+  {
+    if (social.Title == "Twitter")
+    {
+      <a href="@social.URL">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a> 
+    }
+    else if (social.Title == "Linkedin")
+    {
+      <a href="@social.URL">
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+      </a>     
+    }
+    else if (social.Title == "İnstagram")
+    {
+      <a href="@social.URL">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+      </a>    
+    }
+  }
+  <a href="">
+    <i class="fa fa-pinterest" aria-hidden="true"></i>
+  </a>
+</div>
