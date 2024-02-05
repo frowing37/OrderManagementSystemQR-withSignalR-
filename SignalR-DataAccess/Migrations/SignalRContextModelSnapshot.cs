@@ -50,6 +50,38 @@ namespace SignalR_DataAccess.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("SignalR_Entities.Concrete.Basket", b =>
+                {
+                    b.Property<int>("BasketID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketID"));
+
+                    b.Property<decimal>("Count")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MenuTableID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("BasketID");
+
+                    b.HasIndex("MenuTableID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("Baskets");
+                });
+
             modelBuilder.Entity("SignalR_Entities.Concrete.Booking", b =>
                 {
                     b.Property<int>("BookingID")
@@ -394,6 +426,25 @@ namespace SignalR_DataAccess.Migrations
                     b.ToTable("Testimonials");
                 });
 
+            modelBuilder.Entity("SignalR_Entities.Concrete.Basket", b =>
+                {
+                    b.HasOne("SignalR_Entities.Concrete.MenuTable", "MenuTable")
+                        .WithMany("Baskets")
+                        .HasForeignKey("MenuTableID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SignalR_Entities.Concrete.Product", "Product")
+                        .WithMany("Baskets")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuTable");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("SignalR_Entities.Concrete.Discount", b =>
                 {
                     b.HasOne("SignalR_Entities.Concrete.Product", "Product")
@@ -440,6 +491,11 @@ namespace SignalR_DataAccess.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("SignalR_Entities.Concrete.MenuTable", b =>
+                {
+                    b.Navigation("Baskets");
+                });
+
             modelBuilder.Entity("SignalR_Entities.Concrete.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -447,6 +503,8 @@ namespace SignalR_DataAccess.Migrations
 
             modelBuilder.Entity("SignalR_Entities.Concrete.Product", b =>
                 {
+                    b.Navigation("Baskets");
+
                     b.Navigation("Discounts");
 
                     b.Navigation("OrderDetails");

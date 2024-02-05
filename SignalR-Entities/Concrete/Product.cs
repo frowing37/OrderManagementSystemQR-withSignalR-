@@ -26,6 +26,8 @@ namespace SignalR_Entities.Concrete
 		public List<OrderDetail> OrderDetails { get; set; }
 		
 		public List<Discount> Discounts { get; set; }
+		
+		public List<Basket> Baskets { get; set; }
 	}
 }
 

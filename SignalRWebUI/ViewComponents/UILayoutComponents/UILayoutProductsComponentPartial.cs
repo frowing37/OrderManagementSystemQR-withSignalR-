@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging.Console;
 using Newtonsoft.Json;
 using SignalRWebUI.Models.Dtos.ProductDto;
 
@@ -16,7 +17,8 @@ public class UILayoutProductsComponentPartial : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("http://localhost:7237/api/Product");
+        
+        var responseMessage = await client.GetAsync("http://localhost:7237/api/Product/ProductListwithCategories");
 
         if (responseMessage.IsSuccessStatusCode)
         {

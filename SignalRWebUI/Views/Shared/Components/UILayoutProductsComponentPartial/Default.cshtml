@@ -1,34 +1,57 @@
 @model List<SignalRWebUI.Models.Dtos.ProductDto.ResultProductDto>
 
 <div class="filters-content">
-<div class="row grid">
-@foreach (var product in Model)
-{
-    if (@product.ProductStatus)
-    {
-        <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-                <div>
-                    <div class="img-box">
-                        <img src="@product.ImageURL" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            @product.ProductName
-                        </h5>
-                        <p>
-                            @product.Description
-                        </p>
-                        <div class="options">
-                            <h6>
-                                @product.Price ₺
-                            </h6>
+    <div class="row grid">
+        @foreach (var product in Model)
+        {
+            if (@product.ProductStatus)
+            {
+                <div class="col-sm-6 col-lg-4 all pizza">
+                    <div class="box">
+                        <div>
+                            <div class="img-box">
+                                <img src="@product.ImageURL" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    @product.ProductName
+                                </h5>
+                                <p>
+                                    @product.Description
+                                </p>
+                                <div class="options">
+                                    <h6>
+                                        @product.Price ₺
+                                    </h6>
+                                    <a onclick="showproductID(@product.ProductID)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M21 9h-1.42l-3.712-6.496-1.736.992L17.277 9H6.723l3.146-5.504-1.737-.992L4.42 9H3a1.001 1.001 0 0 0-.965 1.263l2.799 10.264A2.005 2.005 0 0 0 6.764 22h10.473c.898 0 1.692-.605 1.93-1.475l2.799-10.263A.998.998 0 0 0 21 9zm-3.764 11v1-1H6.764L4.31 11h15.38l-2.454 9z"></path><path d="M9 13h2v5H9zm4 0h2v5h-2z"></path></svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
+    </div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function showproductID(value){
+        var id = value;
+        $.ajax({
+        type:'post',
+        data:{item:id},
+        contentType:'json',
+        success: function () {
+            swal({
+              title: "Lezzete bir adım daha !",
+              text: "Seçtiğiniz Ürün Sepetinize Eklendi",
+              icon: "success",
+            });
+        }
+        });
     }
-}
-</div>
-</div>
+</script>
