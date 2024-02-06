@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.Concrete;
 using SignalR_DataAccess.Repositories;
@@ -14,6 +15,6 @@ public class efBasket : GenericRepository<Basket>, IBasketDAL
     public List<Basket> getBasketByMenuTable(int ID)
     {
         using var context = new SignalRContext();
-        return context.Baskets.Where(x => x.MenuTableID == ID).ToList();
+        return context.Baskets.Where(x => x.MenuTableID == ID).Include(x=>x.Product).ToList();
     }
 }

@@ -38,7 +38,4 @@
   <ItemGroup>
     <None Remove="Mapping\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
 </Project>

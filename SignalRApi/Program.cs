@@ -4,6 +4,7 @@ using SignalR_Business.Concrete;
 using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.EntityFramework;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using SignalR_Entities.Concrete;
 using SignalRApi.Hub;
 
@@ -51,6 +52,8 @@ builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
 builder.Services.AddScoped<IMenuTableDAL, efMenuTable>();
 builder.Services.AddScoped<IBasketService, BasketManager>();
 builder.Services.AddScoped<IBasketDAL, efBasket>();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
