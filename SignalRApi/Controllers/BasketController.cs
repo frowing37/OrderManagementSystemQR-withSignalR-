@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SignalR_Business.Abstract;
+using SignalR_Dto.BasketDto;
+using SignalR_Entities.Concrete;
 
 namespace SignalRApi.Controllers;
 
@@ -20,5 +22,22 @@ public class BasketController : Controller
         var values = _basketService.getBasketByMenuTablewS(ID);
 
         return Ok(values);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddBasket([FromBody] CreateBasketDto createBasketDto)
+    {
+        Basket basket = new Basket()
+        {
+            Price = createBasketDto.Price,
+            Count = createBasketDto.Count,
+            MenuTableID = createBasketDto.MenuTableID,
+            ProductID = createBasketDto.ProductID,
+            TotalPrice = createBasketDto.TotalPrice
+        };
+        
+        _basketService.AddwS(basket);
+
+        return Ok("Basket Eklendi");
     }
 }

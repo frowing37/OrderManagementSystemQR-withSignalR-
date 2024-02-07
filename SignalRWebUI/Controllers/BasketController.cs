@@ -17,7 +17,7 @@ public class BasketController : Controller
     public async Task<IActionResult> Index(int ID)
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync($"http://localhost/api/Basket/{ID}");
+        var responseMessage = await client.GetAsync($"http://localhost:7237/api/Basket/{ID}");
 
         if (responseMessage.IsSuccessStatusCode)
         {
@@ -28,5 +28,20 @@ public class BasketController : Controller
         }
         
         return View();
+    }
+
+    public async Task<IActionResult> AddBasket(CreateBasketDto createBasketDto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/Basket/", createBasketDto);
+
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index", "Customer");
+        }
+        else
+        {
+            return RedirectToAction("Error", "Home");
+        }
     }
 }
