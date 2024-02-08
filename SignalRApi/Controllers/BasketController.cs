@@ -40,4 +40,22 @@ public class BasketController : Controller
 
         return Ok("Basket Eklendi");
     }
+
+    [HttpDelete("{ID}")]
+    public async Task<IActionResult> DeleteBasket(int ID)
+    {
+        var values = _basketService.getBasketByMenuTablewS(1002);
+        int deleteID;
+        
+        foreach (var basket in values)
+        {
+            if (basket.ProductID == ID)
+            {
+                _basketService.DeletewS(basket);
+                break;
+            }
+        }
+
+        return Ok("Basket Silindi");
+    }
 }

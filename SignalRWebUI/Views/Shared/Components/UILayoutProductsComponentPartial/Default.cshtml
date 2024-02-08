@@ -71,7 +71,7 @@
                     title: "Lezzete bir adım daha !",
                     text: "Seçtiğiniz Ürün Sepetinize Eklendi",
                     icon: "success",
-                              });
+                    });
                 }, 100);
             },
             error: function (xhr,status,error) {
@@ -79,7 +79,6 @@
             }
         });
     }
-
     function postBasket(product) {
       const basket = new Basket(product.price,1,product.price,product.productID,1002);
       $.ajax({
@@ -96,5 +95,4 @@
         },
       });
     }
-
 </script>

@@ -94,4 +94,19 @@ public class BookingController : Controller
             return RedirectToAction("Error", "Home");
         }
     }
+
+    public async Task<IActionResult> CreateBookingByCustomer(CreateBookingDto createBookingDto)
+    {
+        HttpClient client = _httpClientFactory.CreateClient();
+        HttpResponseMessage responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/Booking",createBookingDto);
+
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index", "Booking");
+        }
+        else
+        {
+            return RedirectToAction("Error", "Home");
+        }
+    }
 }
