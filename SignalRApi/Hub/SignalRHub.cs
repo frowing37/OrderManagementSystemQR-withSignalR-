@@ -11,17 +11,20 @@ public class SignalRHub : Hub
      private readonly IOrderService _orderService;
      private readonly IMoneyCaseService _moneyCaseService;
      private readonly IMenuTableService _menuTableService;
+     private readonly IBookingService _bookingService;
 
      public SignalRHub(IProductService productService,
           ICategoryService categoryService,
           IOrderService orderService,
           IMoneyCaseService moneyCaseService,
+          IBookingService bookingService,
           IMenuTableService menuTableService)
      {
           _productService = productService;
           _categoryService = categoryService;
           _orderService = orderService;
           _moneyCaseService = moneyCaseService;
+          _bookingService = bookingService;
           _menuTableService = menuTableService;
      }
 
@@ -87,5 +90,11 @@ public class SignalRHub : Hub
 
           var value3 = _orderService.ActiveOrderCountwS();
           await Clients.All.SendAsync("ReceiveActiveOrderCount2", value3);
+     }
+
+     public async Task GetBookingList()
+     {
+          var values = _bookingService.GetListAllwS();
+          await Clients.All.SendAsync("ReceiveBookingList", values);
      }
 }

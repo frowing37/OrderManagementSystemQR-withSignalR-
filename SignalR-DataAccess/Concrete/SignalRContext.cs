@@ -14,7 +14,6 @@ namespace SignalR_DataAccess.Concrete
         public DbSet<About> Abouts { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }
-
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Contact> Contacts { get; set; }
@@ -31,8 +30,9 @@ namespace SignalR_DataAccess.Concrete
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<MoneyCase> MoneyCases { get; set; }
         public DbSet<MenuTable> MenuTables { get; set; }
-        
         public DbSet<Basket> Baskets { get; set; }
+        
+        public DbSet<Notification> Notifications { get; set; }
      }
 }
 
