@@ -2,6 +2,49 @@
     Layout = null;
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.14/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(() => {
+    var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:7237/SignalRHub").build();
+    $("#connstatus").text(connection.state);
+                        connection.start().then(() => {
+                            $("#connstatus").text(connection.state);
+                            setInterval(()=>{
+                                connection.invoke("SendNotification");
+                                },1000);
+                        }).catch((err) => { console.log(err) });
+						
+                        connection.on("ReceiveNotificationFalseCount", (value)=> {
+                            $("#NotificationFalseCount").text(value);
+                        });
+                        
+                        connection.on("ReceiveNotificationListByFalse", (value2) => {
+                            $("#notionList").empty(); // "notionList" id'li elementin içini temizle
+                        
+                            for (var i = 0; i < value2.length; i++) {
+                                $("#notionList").append(
+                                    '<a href="#">' +
+                                        '<div class="' + value2[i].type + '">' +
+                                            '<i class="' + value2[i].icon + '"></i>' +
+                                        '</div>' +
+                                        '<div class="notif-content">' +
+                                            '<span class="block">' +
+                                                value2[i].description +
+                                            '</span>' +
+                                        '</div>' +
+                                    '</a>'
+                                );
+                            }
+                        });
+
+                    });
+                </script>
+
+
 <div class="main-header">
     <div class="logo-header">
         <a href="index.html" class="logo">
@@ -40,7 +83,7 @@
                 <li class="nav-item dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="la la-bell"></i>
-                        <span class="notification">3</span>
+                        <span class="notification" id="NotificationFalseCount"></span>
                     </a>
                     <ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
                         <li>
@@ -48,16 +91,8 @@
                         </li>
                         <li>
                             <div class="notif-center">
-                                <a href="#">
-                                    <div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
-                                    <div class="notif-content">
-                                        <span class="block">
-                                            New user registered
-                                        </span>
-                                        <span class="time">5 minutes ago</span>
-                                    </div>
-                                </a>
-                                <a href="#">
+                                <div id="notionList"></div>
+                                @*<a href="#">
                                     <div class="notif-icon notif-success"> <i class="la la-comment"></i> </div>
                                     <div class="notif-content">
                                         <span class="block">
@@ -85,7 +120,7 @@
                                         </span>
                                         <span class="time">17 minutes ago</span>
                                     </div>
-                                </a>
+                                </a>*@
                             </div>
                         </li>
                         <li>
