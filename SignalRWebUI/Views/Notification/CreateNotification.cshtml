@@ -1,0 +1,49 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.NotificationDto.CreateNotificationDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Bildirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Notification" asp-action="CreateNotification" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Bildirim Ekleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="categoryname">Bildirim Tipi Giriniz</label>
+                                <input id="categoryname" type="text" asp-for="Type" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryname">Bildirim Adı Giriniz</label>
+                                <input id="categoryname" type="text" asp-for="Icon" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryname">Bildirim Adı Giriniz</label>
+                                <input id="categoryname" type="text" asp-for="Description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryname">Bildirim Adı Giriniz</label>
+                                <input id="categoryname" type="date" asp-for="Date" class="form-control">
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" asp-for="Status">
+                                    <span class="form-check-sign">Bildirim aktif olarak mı oluşturulsun ?</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Bildirim Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

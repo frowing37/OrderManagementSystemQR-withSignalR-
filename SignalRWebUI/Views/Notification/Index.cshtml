@@ -1,0 +1,60 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model List<SignalRWebUI.Models.Dtos.NotificationDto.ResultNotificationDto>
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Bildirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Bildirim Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Bildirimlerle ilgili işlemleri aşağıdan gerçekleştirebilirsiniz :
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Bildirim Tipi</th>
+                                <th scope="col">Bildirim Açıklaması</th>
+                                <th scope="col">Bildirim Icon</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">Sil</th>
+                                <th scope="col">Güncelle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var not in Model)
+                            {
+                                <tr>
+                                    <td>@not.NotificationID</td>
+                                    <td>@not.Type</td>
+                                    <td>@not.Description</td>
+                                    <td>@not.Icon</td>
+                                    @if(@not.Status) {
+                                        <td><a href="/Notification/ActivateNotification/@not.NotificationID" class="btn btn-outline-info">Aktif</a></td>
+                                    }
+                                    else {
+                                        <td><a href="/Notification/ActivateNotification/@not.NotificationID" class="btn btn-outline-dark">DeAktif</a></td>
+                                    }
+                                    <td><a href="/Notification/DeleteNotification/@not.NotificationID" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Notification/UpdateNotification/@not.NotificationID" class="btn btn-outline-success">Güncelle</a></td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                        <a href="/Notification/CreateNotification" class="btn btn-outline-primary">Yeni Bildirim Ekle</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
