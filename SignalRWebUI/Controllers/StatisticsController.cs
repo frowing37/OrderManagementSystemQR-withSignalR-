@@ -8,4 +8,9 @@ public class StatisticsController : Controller
     {
         return View();
     }
+
+    public IActionResult Tables()
+    {
+        return View();
+    }
 }

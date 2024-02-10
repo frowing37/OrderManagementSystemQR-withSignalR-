@@ -109,4 +109,10 @@ public class SignalRHub : Hub
           var value1 = _notificationService.getAllNotificationsByFalse();
           await Clients.All.SendAsync("ReceiveNotificationListByFalse", value1);
      }
+
+     public async Task TableStatusList()
+     {
+          var value = _menuTableService.GetListAllwS();
+          await Clients.All.SendAsync("ReceiveTableStatus", value);
+     }
 }
