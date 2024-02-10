@@ -38,4 +38,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.14" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\colorlib-regform-32\.DS_Store" />
+  </ItemGroup>
 </Project>

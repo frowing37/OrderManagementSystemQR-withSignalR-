@@ -1,0 +1,73 @@
+@{
+    Layout = "/Views/Shared/UILayout2.cshtml";
+}
+
+<script type="text/javascript">
+                    $(document).ready(() => {
+                        var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:7237/SignalRHub").build();
+                        connection.start().then(() => {
+                        }).catch((err) => { console.log(err) });
+						
+                        connection.on("ReceiveClientCount", (value)=>{
+                            $("#clientCount").text(value);
+                        });
+                    });
+</script>
+
+<section class="food_section layout_padding">
+    <div class="container">
+      
+        <div class="row p-1">
+            <div class="col-2 font-weight-bold">Anlık Client Sayısı: <strong id="clientCount"></strong></div>
+        </div>
+        
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center mb-4">Anadolu Tat 1071 Anlık Mesajlaşma</h3>
+                </div>
+            </div>
+        
+            <div class="row p-1">
+                <div class="col-2">Kullanıcı Adınız: </div>
+                <div class="col-5">
+                    <input type="text" id="userInput" class="form-control"/>
+                </div>
+            </div>
+        
+            <div class="row p-1">
+                <div class="col-2">Mesajınız: </div>
+                <div class="col-5">
+                    <input type="text" id="messageInput" class="form-control"/>
+                </div>
+            </div>
+        
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <input type="button" id="sendButton" value="Mesaj Gönder" class="btn btn-warning"/>
+                </div>
+            </div>
+        
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <hr/>
+                </div>
+            </div>
+        
+            <div class="row p-1">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <ul class="list-group" id="messageList"></ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.8/signalr.min.js"></script>*@
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.14/dist/browser/signalr.min.js"></script>
+<script src="~/js/chat.js"></script>

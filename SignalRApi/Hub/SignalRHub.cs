@@ -115,4 +115,25 @@ public class SignalRHub : Hub
           var value = _menuTableService.GetListAllwS();
           await Clients.All.SendAsync("ReceiveTableStatus", value);
      }
+
+     public async Task SendMessage(string user, string message)
+     {
+          await Clients.All.SendAsync("ReceiveMessage",user,message);
+     }
+
+     public static int clientCount { get; set; } = 0;
+
+     public async override Task OnConnectedAsync()
+     {
+          clientCount++;
+          await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+          await base.OnConnectedAsync();
+     }
+
+     public async override Task OnDisconnectedAsync(Exception? exception)
+     {
+          clientCount--;
+          await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+          await base.OnDisconnectedAsync(exception);
+     }
 }
