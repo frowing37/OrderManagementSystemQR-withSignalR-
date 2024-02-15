@@ -5,6 +5,8 @@ using SignalR_DataAccess.Abstract;
 using SignalR_DataAccess.EntityFramework;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 using SignalR_Entities.Concrete;
 using SignalRApi.Hub;
 
@@ -56,6 +58,8 @@ builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDAL, efNotification>();
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

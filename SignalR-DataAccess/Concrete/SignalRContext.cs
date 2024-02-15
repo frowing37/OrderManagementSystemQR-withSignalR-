@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SignalR_Entities.Concrete;
 
 namespace SignalR_DataAccess.Concrete
 {
-	public class SignalRContext : DbContext
+	public class SignalRContext : IdentityDbContext<AppUser,AppRole,int>
 	{
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,7 +32,6 @@ namespace SignalR_DataAccess.Concrete
         public DbSet<MoneyCase> MoneyCases { get; set; }
         public DbSet<MenuTable> MenuTables { get; set; }
         public DbSet<Basket> Baskets { get; set; }
-        
         public DbSet<Notification> Notifications { get; set; }
      }
 }
