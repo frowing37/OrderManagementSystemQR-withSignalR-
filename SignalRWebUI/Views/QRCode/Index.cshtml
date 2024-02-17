@@ -1,0 +1,28 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dto_s.QRCode
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">QR Kod İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="QRCode" asp-action="Index" method="post">
+                    <input type="text" name="value"/>
+                    <br/>
+                    <br/>
+                    <input type="submit" value="QR Kod Oluştur" class="btn btn-primary"/>
+                </form>
+                <br/>
+                
+                @if (@Model.ImageURL != "aa")
+                {
+                    <img src="@Model.ImageURL" class="img-fluid w-10 h-10 mb-3" />
+                    <a href="@Model.ImageURL" class="btn tbn-primary w-100" download="QRCode.png">Download</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

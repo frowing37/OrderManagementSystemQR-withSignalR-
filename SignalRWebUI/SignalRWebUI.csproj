@@ -44,9 +44,19 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.2" />
+    <PackageReference Include="SkiaSharp" Version="3.0.0-preview.1.8" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="ZXing.Net" Version="0.16.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SignalR-DataAccess\SignalR-DataAccess.csproj" />
     <ProjectReference Include="..\SignalR-Entities\SignalR-Entities.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\..\Downloads\QRCoder.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
