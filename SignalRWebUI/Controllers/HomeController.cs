@@ -38,7 +38,7 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
-        var user = await _userManager.FindByEmailAsync(loginDto.Email);
+        /*var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
         if (user == null)
         {
@@ -46,23 +46,27 @@ public class HomeController : Controller
         }
         else
         {
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
+            
+        }*/
+        
+        var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, false, false);
 
-            if (result.Succeeded)
+        if (result.Succeeded)
+        {
+            /*if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                if (await _userManager.IsInRoleAsync(user, "Admin"))
-                {
-                    return RedirectToAction("Index", "Category");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Customer");
-                }
+                
             }
             else
             {
-                return RedirectToAction("Error", "Home");
-            }
+                return RedirectToAction("Index", "Customer");
+            }*/
+            
+            return RedirectToAction("Index", "Category");
+        }
+        else
+        {
+            return RedirectToAction("Error", "Home");
         }
     }
 
@@ -90,6 +94,7 @@ public class HomeController : Controller
                 SecondName = registerDto.SecondName,
                 Surname = registerDto.Surname,
                 PhoneNumber = registerDto.PhoneNumber,
+                Email = registerDto.Mail,
                 Mail = registerDto.Mail,
                 Password = registerDto.Password
             };
