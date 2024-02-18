@@ -1,73 +1,50 @@
 @{
-    Layout = "/Views/Shared/UILayout2.cshtml";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-<script type="text/javascript">
-                    $(document).ready(() => {
-                        var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:7237/SignalRHub").build();
-                        connection.start().then(() => {
-                        }).catch((err) => { console.log(err) });
-						
-                        connection.on("ReceiveClientCount", (value)=>{
-                            $("#clientCount").text(value);
-                        });
-                    });
-</script>
+@model List<SignalRWebUI.Models.Dtos.MessageDto.ResultMessageDto>
 
-<section class="food_section layout_padding">
-    <div class="container">
-      
-        <div class="row p-1">
-            <div class="col-2 font-weight-bold">Anlık Client Sayısı: <strong id="clientCount"></strong></div>
-        </div>
-        
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="text-center mb-4">Anadolu Tat 1071 Anlık Mesajlaşma</h3>
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Mesaj İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Mesaj Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Mesajlarla ilgili işlemleri aşağıdan gerçekleştirebilirsiniz :
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                            <tr>
+                                <th scope="col">Kişi</th>
+                                <th scope="col">Telefon</th>
+                                <th scope="col">Mail</th>
+                                <th scope="col">Gönderim Tarihi</th>
+                                <th scope="col">Detay Sayfası</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var message in Model)
+                            {
+                                <tr>
+                                    <td>@message.NameSurname</td>
+                                    <td>@message.Phone</td>
+                                    <td>@message.Mail</td>
+                                    <td>@message.MessageSendDate</td>
+                                    <td><a href="/Message/DetailMessage/@message.MessageID" class="btn btn-outline-success">Detay</a></td>
+                                    <td><a href="/Message/DeleteMessage/@message.MessageID" class="btn btn-outline-danger">Sil</a></td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        
-            <div class="row p-1">
-                <div class="col-2">Kullanıcı Adınız: </div>
-                <div class="col-5">
-                    <input type="text" id="userInput" class="form-control"/>
-                </div>
-            </div>
-        
-            <div class="row p-1">
-                <div class="col-2">Mesajınız: </div>
-                <div class="col-5">
-                    <input type="text" id="messageInput" class="form-control"/>
-                </div>
-            </div>
-        
-            <div class="row p-1">
-                <div class="col-2"></div>
-                <div class="col-5">
-                    <input type="button" id="sendButton" value="Mesaj Gönder" class="btn btn-warning"/>
-                </div>
-            </div>
-        
-            <div class="row p-1">
-                <div class="col-2"></div>
-                <div class="col-5">
-                    <hr/>
-                </div>
-            </div>
-        
-            <div class="row p-1">
-                <div class="col-2"></div>
-                <div class="col-5">
-                    <ul class="list-group" id="messageList"></ul>
-                </div>
-            </div>
-            
         </div>
     </div>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.8/signalr.min.js"></script>*@
-<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.14/dist/browser/signalr.min.js"></script>
-<script src="~/js/chat.js"></script>
+</div>

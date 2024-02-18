@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
 using Newtonsoft.Json;
 using SignalRWebUI.Models.Dtos.AboutDto;
 using SignalRWebUI.Models.Dtos.DiscountDto;
+using SignalRWebUI.Models.Dtos.MessageDto;
 
 namespace SignalRWebUI.Controllers;
 
@@ -67,6 +68,33 @@ public class CustomerController : Controller
     }
 
     public IActionResult Booking()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult Message()
+    {
+        return View();
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Message(CreateMessageDto createMessageDto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/Message", createMessageDto);
+
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index", "Customer");
+        }
+        else
+        {
+            return RedirectToAction("Error", "Home");
+        }
+    }
+
+    public IActionResult Chat()
     {
         return View();
     }

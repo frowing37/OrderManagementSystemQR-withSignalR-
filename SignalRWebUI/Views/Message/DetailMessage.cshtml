@@ -1,0 +1,49 @@
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+@model SignalRWebUI.Models.Dtos.MessageDto.GetMessageDto
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Mesaj İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Mesaj Detay Sayfası</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="featuretitle1">Adı Soyadı</label>
+                            <label for="featuretitle1">@Model.NameSurname</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="featuredes1">Mesaj İçeriği</label>
+                            <label for="featuredes1">@Model.MessageContent</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="featuretitle1">Mail</label>
+                            <label for="featuretitle1">@Model.Mail</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="featuredes1">Telefon</label>
+                            <label for="featuredes1">@Model.Phone</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="featuretitle1">Meslek</label>
+                            <label for="featuretitle1">@Model.Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="featuredes1">Mesaj Gönderim Tarihi</label>
+                            <label for="featuredes1">@Model.MessageSendDate</label>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button type="submit" class="btn btn-primary">Geri Dön</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

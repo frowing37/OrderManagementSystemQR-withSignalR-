@@ -137,5 +137,17 @@ public class HomeController : Controller
 
         return View();
     }
+
+    public IActionResult Logout()
+    {
+        _signInManager.SignOutAsync();
+
+        return RedirectToAction("Index", "Customer");
+    }
+
+    public IActionResult UserSettings()
+    {
+        return View();
+    }
 }
 
