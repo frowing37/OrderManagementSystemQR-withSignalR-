@@ -67,7 +67,7 @@ public class MessageController : Controller
         return Ok("Mesaj Güncellendi");
     }
 
-    [HttpDelete("ID")]
+    [HttpDelete("{ID}")]
     public IActionResult DeleteMessage(int ID)
     {
         var value = _messageService.GetByIDwS(ID);

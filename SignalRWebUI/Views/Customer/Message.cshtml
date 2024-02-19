@@ -8,14 +8,14 @@
 <section class="book_section layout_padding">
     <div class="container">
         <div class="heading_container">
-            <h2>
+            <h2 style="color:#dae0e5;">
                 Bize Ulaş !, Canımız isterse sana geri döneriz...
             </h2>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container">
-                    <form asp-controller="Message" asp-action="CreateMessage">
+                    <form asp-controller="Customer" asp-action="Message">
                         <div>
                             <input type="text" class="form-control" asp-for="NameSurname" placeholder="İsminiz"/>
                         </div>
@@ -23,16 +23,13 @@
                             <input type="tel" class="form-control" asp-for="Phone" placeholder="Telefon Numaranız"/>
                         </div>
                         <div>
-                            <input type="email" class="form-control" asp-for="Mail" placeholder="Email adresiniz"/>
+                            <input type="email" class="form-control" asp-for="Mail" placeholder="Email adresiniz" required/>
                         </div>
                         <div>
-                            <input type="text" class="form-control" asp-for="Subject" placeholder="Rezerv Kişi Sayısı"/>
+                            <input type="text" class="form-control" asp-for="Subject" placeholder="Ünvanınız"/>
                         </div>
                         <div>
-                            <input type="text" class="form-control" asp-for="MessageContent" placeholder="Tarih"/>
-                        </div>
-                        <div>
-                            <input type="date" class="form-control" asp-for="MessageSendDate" placeholder="Tarih"/>
+                            <input type="text" class="form-control" asp-for="MessageContent" placeholder="İletmek istedikleriniz"/>
                         </div>
                         <div class="btn_box">
                             <button type="submit">

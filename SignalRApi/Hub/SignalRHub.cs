@@ -121,6 +121,29 @@ public class SignalRHub : Hub
           await Clients.All.SendAsync("ReceiveMessage",user,message);
      }
 
+     public async Task SendSidebarNotificaton()
+     {
+          var value = _productService.getProductCountwS();
+          await Clients.All.SendAsync("ReceiveProductCount", value);
+          
+          var value2 = _categoryService.getCategoryCountwS();
+          await Clients.All.SendAsync("ReceiveCategoryCount", value2);
+
+          var values = _menuTableService.GetListAllwS();
+          int count = 0;
+          foreach (var val in values)
+          {
+               if (val.Status)
+               {
+                    count++;
+               }
+          }
+          await Clients.All.SendAsync("ReceiveActiveMenuTableCount", count);
+          
+          var value3 = _notificationService.getNotificationCountByStatusFalsewS();
+          await Clients.All.SendAsync("ReceiveNotificationFalseCount", value3);
+     }
+
      public static int clientCount { get; set; } = 0;
 
      public async override Task OnConnectedAsync()

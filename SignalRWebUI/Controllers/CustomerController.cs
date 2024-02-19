@@ -81,6 +81,7 @@ public class CustomerController : Controller
     [HttpPost]
     public async Task<IActionResult> Message(CreateMessageDto createMessageDto)
     {
+        createMessageDto.MessageSendDate = DateTime.Now;
         var client = _httpClientFactory.CreateClient();
         var responseMessage = await client.PostAsJsonAsync("http://localhost:7237/api/Message", createMessageDto);
 

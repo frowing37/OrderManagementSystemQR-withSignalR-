@@ -56,6 +56,9 @@ builder.Services.AddScoped<IBasketService, BasketManager>();
 builder.Services.AddScoped<IBasketDAL, efBasket>();
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 builder.Services.AddScoped<INotificationDAL, efNotification>();
+builder.Services.AddScoped<IMessageService, MessageManager>();
+builder.Services.AddScoped<IMessageDAL, efMessage>();
+
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

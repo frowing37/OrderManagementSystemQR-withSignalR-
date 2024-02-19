@@ -21,8 +21,13 @@
                 <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#edit">
+                            <a href="/Home/UserSettings">
                                 <span class="link-collapse">Profil Ayarları</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Message/Index">
+                                <span class="link-collapse">Mesajlar</span>
                             </a>
                         </li>
                     </ul>
@@ -48,14 +53,14 @@
                 <a href="/Category/Index">
                     <i class="la la-keyboard-o"></i>
                     <p>Kategoriler</p>
-                    <span class="badge badge-count">50</span>
+                    <span class="badge badge-success" id="categoryCount"></span>
                 </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a href="/Product/Index">
                     <i class="la la-th"></i>
                     <p>Ürünler</p>
-                    <span class="badge badge-count">6</span>
+                    <span class="badge badge-success" id="productCount"></span>
                 </a>
             </li>
             <li class="nav-item">
@@ -68,34 +73,32 @@
                 <a href="/Booking/Index">
                     <i class="la la-bell"></i>
                     <p>Rezervasyonlar</p>
-                    <span class="badge badge-success">3</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/About/Index">
                     <i class="la la-font"></i>
                     <p>Hakkımızda</p>
-                    <span class="badge badge-danger">25</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/Statistics/Tables">
                     <i class="la la-bell"></i>
                     <p>Masa Durumları</p>
-                    <span class="badge badge-success">3</span>
+                    <span class="badge badge-warning" id="activeMenuTableCount"></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/Notification/Index">
-                    <i class="la la-fonticons"></i>
+                    <i class="la la-bell"></i>
                     <p>Bildirimler</p>
+                    <span class="badge badge-danger" id="notificationFalseCount"></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/Feature/Index">
                     <i class="la la-font"></i>
                     <p>Öne Çıkanlar</p>
-                    <span class="badge badge-danger">25</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -128,12 +131,41 @@
                     <p>QR</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="/Message/Index">
-                    <i class="la la-fonticons"></i>
-                    <p>Mesajlar</p>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.14/dist/browser/signalr.min.js"></script>
+
+<script type="text/javascript">
+                    $(document).ready(() => {
+                        var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:7237/SignalRHub").build();
+                        $("#connstatus").text(connection.state);
+                        connection.start().then(() => {
+                            $("#connstatus").text(connection.state);
+                            setInterval(()=>{
+                                connection.invoke("SendSidebarNotificaton");
+                                },1000);
+                        }).catch((err) => { console.log(err) });
+						
+                        connection.on("ReceiveProductCount", (value)=> {
+                            $("#productCount").text(value);
+                        });
+                        
+                        connection.on("ReceiveCategoryCount", (value2)=> {
+                            $("#categoryCount").text(value2);
+                        });
+                        
+                        connection.on("ReceiveActiveMenuTableCount", (value3)=> {
+                            $("#activeMenuTableCount").text(value3);
+                        });
+                        
+                        connection.on("ReceiveNotificationFalseCount", (value4)=> {
+                            $("#notificationFalseCount").text(value4);
+                        });
+                    });
+                </script>
+                

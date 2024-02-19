@@ -30,8 +30,7 @@ public class MessageController : Controller
             return RedirectToAction("Error", "Home");
         }
     }
-
-    [HttpGet("{ID}")]
+    
     public async Task<IActionResult> DetailMessage(int ID)
     {
         var client = _httpClientFactory.CreateClient();
