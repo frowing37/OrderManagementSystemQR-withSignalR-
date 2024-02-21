@@ -23,7 +23,7 @@ public class BasketController : Controller
         if (responseMessage.IsSuccessStatusCode)
         {
             var json = await responseMessage.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<List<ResultBasketDto>>(json);
+            var values = JsonConvert.DeserializeObject<List<ResultBasketDto>>(json); 
             List<ResultBasketDto> list = new List<ResultBasketDto>();
             List<int> temp = new List<int>();
             int count = 0;

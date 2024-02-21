@@ -16,5 +16,7 @@ public class AppUser : IdentityUser<int>
 
     public string Password { get; set; }
     
+    public string ImageURL { get; set; }
+    
     public int ConfirmCod { get; set; }
 }

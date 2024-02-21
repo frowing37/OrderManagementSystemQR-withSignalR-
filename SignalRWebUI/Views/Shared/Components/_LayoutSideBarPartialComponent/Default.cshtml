@@ -2,16 +2,18 @@
     Layout = null;
 }
 
+@model SignalR_Entities.Concrete.AppUser
+
 <div class="sidebar">
     <div class="scrollbar-inner sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="/ThemeFiles/assets/img/senamm.jpeg">
+                <img src=@Model.ImageURL>
             </div>
             <div class="info">
                 <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                     <span>
-                        Sena
+                        @Model.Name
                         <span class="user-level">Admin</span>
                         <span class="caret"></span>
                     </span>

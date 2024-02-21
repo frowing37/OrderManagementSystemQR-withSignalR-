@@ -1,16 +1,90 @@
 @{
-    Layout = null;
+    Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
-<!DOCTYPE html>
+@model SignalRWebUI.Models.Dtos.UserDto.UpdateUserDto
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Admin Profil İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-controller="Feature" asp-action="CreateFeature" method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Profil Güncelleme Sayfası</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="featuretitle1">Ad</label>
+                                <input id="featuretitle1" type="text" asp-for="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes1">Soyad</label>
+                                <input id="featuredes1" type="text" asp-for="Surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle1">Telefon</label>
+                                <input id="featuretitle1" type="text" asp-for="Mail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuredes1">Mail</label>
+                                <input id="featuredes1" type="text" asp-for="Phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="featuretitle1">Şifre</label>
+                                <input id="featuretitle1" type="text" asp-for="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Profil Bilgilerini Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+                <form id="updatePicForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Profil Fotoğrafı Güncelleme</div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="profilePic">Profil Fotoğrafı</label>
+                                <input id="profilePic" type="file"/>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Profil Fotoğrafını Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-</body>
-</html>
+
+<script>
+document.querySelector('#updatePicForm').addEventListener('submit',function (e){
+    e.preventDefault();
+    
+    var profilPic = document.getElementById('profilePic').value;
+    
+    var formData = new FormData();
+    formData.append('File',profilPic);
+    
+    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/Home/UpdateProfilPic/', true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200 || xhr.status === 302) {     
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.redirectUrl) {
+                                    window.location.href = response.redirectUrl;
+                                }
+                            }
+                        }
+                    };
+                    xhr.send(formData);
+});
+</script>

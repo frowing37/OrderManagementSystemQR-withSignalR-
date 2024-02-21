@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignalR_Entities.Concrete;
+using SignalRWebUI.Models.Dto_s.FileDto;
 using SignalRWebUI.Models.Dtos.UserDto;
 
 namespace SignalRWebUI.Controllers;
@@ -154,14 +155,80 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Customer");
     }
 
-    public IActionResult UserSettings()
+    [HttpGet]
+    public async Task<IActionResult> UserSettings()
     {
-        return View();
+        var userId = HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var user = await _userManager.FindByIdAsync(userId);
+
+        UpdateUserDto updateUser = new UpdateUserDto()
+        {
+            Name = user.Name,
+            Surname = user.Surname,
+            Mail = user.Mail,
+            Password = user.Password,
+            Phone = user.PhoneNumber
+        };
+        
+        return View(updateUser);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> UserSettings(UpdateUserDto updateUserDto)
+    {
+        var userId = HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var user = await _userManager.FindByIdAsync(userId);
+
+        user.Name = updateUserDto.Name;
+        user.Surname = updateUserDto.Surname;
+        user.PhoneNumber = updateUserDto.Phone;
+        user.Mail = updateUserDto.Mail;
+        user.Password = user.Password;
+        
+        var passwordHasher = new PasswordHasher<AppUser>();
+        user.PasswordHash = passwordHasher.HashPassword(user, user.Password);
+
+        await _userManager.UpdateAsync(user);
+
+        string redirectUrl = "/Home/UserSettings";
+        
+        return Json(new { redirectUrl });
+    }
+
+    public async Task<IActionResult> UpdateProfilPic(SingleFileDto singleFileDto)
+    {
+        var userId = HttpContext.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var user = await _userManager.FindByIdAsync(userId);
+
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/AdminProfiles");
+        if (Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        FileInfo fileInfo = new FileInfo(singleFileDto.File.FileName);
+        string fileName = singleFileDto.Filename + fileInfo.Extension;
+
+        string fileNameWithPath = Path.Combine(path, fileName);
+
+        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+        {
+            singleFileDto.File.CopyTo(stream);
+        }
+
+        user.ImageURL = fileNameWithPath;
+
+        await _userManager.UpdateAsync(user);
+        
+        string redirectUrl = "/Home/UserSettings";
+
+        return Json(new { redirectUrl });
     }
     
     public IActionResult SignUpIn()
     {
         return View();
     }
+    
 }
 
