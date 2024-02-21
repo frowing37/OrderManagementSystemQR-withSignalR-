@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignalR_Entities.Concrete;
-using SignalRWebUI.Models;
 using SignalRWebUI.Models.Dtos.UserDto;
 
 namespace SignalRWebUI.Controllers;
@@ -11,7 +9,7 @@ public class HomeController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
-
+    
     public HomeController(UserManager<AppUser> userManager,
                           SignInManager<AppUser> signInManager)
     {
@@ -38,7 +36,7 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
-        /*var user = await _userManager.FindByEmailAsync(loginDto.Email);
+        var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
         if (user == null)
         {
@@ -46,27 +44,29 @@ public class HomeController : Controller
         }
         else
         {
+            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
             
-        }*/
-        
-        var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, false, false);
-
-        if (result.Succeeded)
-        {
-            /*if (await _userManager.IsInRoleAsync(user, "Admin"))
+            if (result.Succeeded)
             {
-                
+                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    var redirectUrl = "/Category/Index";
+
+                    return Json(new { redirectUrl });
+                }
+                else
+                {
+                    var redirectUrl = "/Customer/Index";
+
+                    return Json(new { redirectUrl });
+                }
+            
+                return RedirectToAction("Index", "Category");
             }
             else
             {
-                return RedirectToAction("Index", "Customer");
-            }*/
-            
-            return RedirectToAction("Index", "Category");
-        }
-        else
-        {
-            return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 
@@ -99,23 +99,32 @@ public class HomeController : Controller
                 Password = registerDto.Password
             };
 
+            var passwordHasher = new PasswordHasher<AppUser>();
+            newUser.PasswordHash = passwordHasher.HashPassword(newUser, newUser.Password);
+
             var result = await _userManager.CreateAsync(newUser);
 
             if (result.Succeeded)
             {
                 var admins = await _userManager.GetUsersInRoleAsync("Admin");
 
-                if (admins.Count == 0)
+                if (admins.Count <= 5)
                 {
                     await _userManager.AddToRoleAsync(newUser, "Admin");
                     await _signInManager.SignInAsync(newUser, true);
-                    return RedirectToAction("Index", "Category");
+                    
+                    var redirectUrl = "/Category/Index";
+
+                    return Json(new { redirectUrl });
                 }
                 else
                 {
                     await _userManager.AddToRoleAsync(newUser, "Customer");
                     await _signInManager.SignInAsync(newUser, true);
-                    return RedirectToAction("Index", "Customer");
+                    
+                    var redirectUrl = "/Customer/Index";
+
+                    return Json(new { redirectUrl });
                 }
             }
             else
@@ -146,6 +155,11 @@ public class HomeController : Controller
     }
 
     public IActionResult UserSettings()
+    {
+        return View();
+    }
+    
+    public IActionResult SignUpIn()
     {
         return View();
     }
