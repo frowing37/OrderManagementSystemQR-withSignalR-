@@ -1,4 +1,6 @@
 
+using SignalR_Entities.Concrete;
+
 namespace SignalRWebUI.Models.Dtos.BasketDto;
 
 public class ResultBasketDto
@@ -8,7 +10,8 @@ public class ResultBasketDto
     public decimal Count { get; set; }
     public decimal TotalPrice { get; set; }
     public int ProductID { get; set; }
-    public string ProductName { get; set; }
+    
+    public Product Product { get; set; }
     
     public int MenuTableID { get; set; }
     

@@ -15,7 +15,7 @@ public class efBasket : GenericRepository<Basket>, IBasketDAL
     public List<Basket> getBasketByMenuTable(int ID)
     {
         using var context = new SignalRContext();
-        var values = context.Baskets.Where(x => x.MenuTableID == ID)
+        var values = context.Baskets.Where(x=>x.MenuTableID == ID)
             .Include(y=>y.Product).ToList();
         
         return values;
